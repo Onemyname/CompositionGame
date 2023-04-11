@@ -1,3 +1,28 @@
 <resources>
-    <string name="app_name">CompositionGame</string>
+    <string name="app_name">Composition Game</string>
+    <string name="welcome_title">Number Composition</string>
+    <string name="medium">MEDIUM</string>
+    <string name="easy">EASY</string>
+    <string name="test">TEST</string>
+    <string name="hard">HARD</string>
+    <string name="division">÷</string>
+    <string name="addition">+</string>
+    <string name="subtraction">-</string>
+    <string name="multiplication">×</string>
+    <string name="welcome_logo">Welcome logo</string>
+    <string name="game_rules">Game Rules: You will see three figures,
+        two at the bottom and one at the top. Two of the figures will have numbers.
+        You need to insert the missing number so that the sum of the numbers in the two bottom figures equals the number in the top figure.
+        Example: The number in the top circle is 7, one of the bottom figures has a question mark, and the other has the number 4.
+        Therefore, the missing number should be 3 because 3 + 4 = 7.</string>
+    <string name="button_understand">Understood</string>
+    <string name="game_over">Game Over</string>
+    <string name="required_score">Required number of correct answers: %s</string>
+    <string name="score_answers">Your score: %s</string>
+    <string name="required_percentage">Required percentage of correct answers: %s</string>
+    <string name="score_percentage">Percentage of correct answers: %s</string>
+    <string name="retry">Retry</string>
+    <string name="right_answers">%s out of %s correct answers</string>
+    <string name="progress_answers">%s correct answers\n(minimum %s)</string>
+    <string name="question_mark">sss</string>
 </resources>

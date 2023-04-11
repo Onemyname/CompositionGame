@@ -7,4 +7,15 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name = "medium_sea_green">#3CB371</color>
+    <color name="light_green">#90EE90</color>
+    <color name="dark_green">#006400</color>
+    <color name="grey">#DCDCDC</color>
+    <color name="pale_turquoise">#AFEEEE</color>
+    <color name="royal_blue">#4169E1</color>
+    <color name="tomato">#FF6347</color>
+    <color name="khaki">#F0E68C</color>
+    <color name="forest_green">#228B22</color>
+    <color name="goldenrod">#DAA520</color>
+
 </resources>

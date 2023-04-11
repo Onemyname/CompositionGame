@@ -15,9 +15,9 @@
         <item name="android:textColor">#FFFFFF</item>
         <item name="android:textStyle">bold</item>
         <item name="android:shadowColor">@color/grey</item>
-        <item name="android:shadowDx">10</item>
+        <item name="android:shadowDx">7</item>
         <item name="android:shadowDy">10</item>
-        <item name="android:shadowRadius">20</item>
+        <item name="android:shadowRadius">12</item>
         <item name="fontFamily">@font/boba_cups_font</item>
     </style>
 

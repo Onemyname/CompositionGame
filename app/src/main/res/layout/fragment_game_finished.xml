@@ -1,97 +1,90 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".presentation.GameFinishedFragment"
     android:background="@drawable/gradient_background"
+    tools:context=".presentation.GameFinishedFragment"
 
     >
 
     <ImageView
         android:id="@+id/emoji_result"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_margin="48dp"
+        android:layout_width="409dp"
+        android:layout_height="250dp"
         android:contentDescription="@string/game_over"
-        app:layout_constraintBottom_toTopOf="@id/tv_required_answers"
+        app:layout_constraintBottom_toTopOf="@+id/tv_required_percentage"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:srcCompat="@drawable/congrats"
-        />
+        app:layout_constraintVertical_chainStyle="spread_inside"
+        tools:srcCompat="@drawable/congrats" />
 
     <TextView
         android:id="@+id/tv_required_answers"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="16dp"
         android:text="@string/required_score"
+        android:textAppearance="@style/boba_cups_text_style_small_shadow"
         android:textSize="18sp"
-        app:layout_constraintBottom_toTopOf="@id/tv_score_answers"
+        app:layout_constraintBottom_toTopOf="@+id/tv_score_answers"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_chainStyle="packed"
-        android:textAppearance="@style/boba_cups_text_style_small_shadow"
-        />
+        app:layout_constraintTop_toBottomOf="@+id/tv_required_percentage" />
 
     <TextView
         android:id="@+id/tv_score_answers"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
         android:text="@string/score_answers"
-        android:textSize="18sp"
-        app:layout_constraintBottom_toTopOf="@id/tv_required_percentage"
-        app:layout_constraintEnd_toEndOf="@id/tv_required_answers"
-        app:layout_constraintStart_toStartOf="@id/tv_required_answers"
-        app:layout_constraintTop_toBottomOf="@id/tv_required_answers"
         android:textAppearance="@style/boba_cups_text_style_small_shadow"
-        />
+        android:textSize="18sp"
+        app:layout_constraintBottom_toTopOf="@+id/tv_score_percentage"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_required_answers" />
 
     <TextView
         android:id="@+id/tv_required_percentage"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
         android:text="@string/required_percentage"
-        android:textSize="18sp"
-        app:layout_constraintBottom_toTopOf="@id/tv_score_percentage"
-        app:layout_constraintEnd_toEndOf="@id/tv_required_answers"
-        app:layout_constraintStart_toStartOf="@id/tv_required_answers"
-        app:layout_constraintTop_toBottomOf="@id/tv_score_answers"
-        app:layout_constraintVertical_chainStyle="packed"
         android:textAppearance="@style/boba_cups_text_style_small_shadow"
-        />
+        android:textSize="18sp"
+        app:layout_constraintBottom_toTopOf="@+id/tv_required_answers"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/emoji_result" />
 
     <TextView
         android:id="@+id/tv_score_percentage"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
         android:text="@string/score_percentage"
-        android:textSize="18sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@id/tv_required_answers"
-        app:layout_constraintStart_toStartOf="@id/tv_required_answers"
-        app:layout_constraintTop_toBottomOf="@id/tv_required_percentage"
         android:textAppearance="@style/boba_cups_text_style_small_shadow"
-        />
+        android:textSize="18sp"
+        app:layout_constraintBottom_toTopOf="@+id/button_retry"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_score_answers" />
 
     <Button
         android:id="@+id/button_retry"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/retry"
-        app:layout_constraintBottom_toBottomOf="parent"
-        android:textAppearance="@style/boba_cups_text_style"
-        android:layout_marginBottom="4dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginEnd="8dp"
         android:background="@drawable/button_choose_background"
+        android:text="@string/retry"
+        android:textAppearance="@style/boba_cups_text_style"
         app:backgroundTint="@color/royal_blue"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_score_percentage"
+        tools:layout_editor_absoluteX="8dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
         />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

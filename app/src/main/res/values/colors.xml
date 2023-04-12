@@ -17,5 +17,7 @@
     <color name="khaki">#F0E68C</color>
     <color name="forest_green">#228B22</color>
     <color name="goldenrod">#DAA520</color>
+    <color name="dark_slate_gray">#2F4F4F</color>
+
 
 </resources>

@@ -4,15 +4,16 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".presentation.GameFragment"
-    android:background="@drawable/gradient_background">
+    android:background="@drawable/gradient_background"
+    tools:context=".presentation.GameFragment">
+
 
     <TextView
         android:id="@+id/tv_timer"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="8dp"
-        android:textAppearance="@style/choose_button_text_style"
+        android:textAppearance="@style/boba_cups_text_style"
         android:textSize="60sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -23,114 +24,195 @@
         android:id="@+id/tv_answers_progress"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="center"
-        android:layout_marginTop="8dp"
-        android:layout_marginBottom="4dp"
         android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
+        android:layout_marginBottom="4dp"
+        android:gravity="center"
         android:text="@string/progress_answers"
-        android:textAppearance="@style/choose_button_bigger_text_style"
+        android:textAppearance="@style/boba_cups_big_text_style"
         android:textSize="24sp"
         app:layout_constraintBottom_toTopOf="@+id/progress_bar"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
-    <TextView
+    <Button
         android:id="@+id/tv_option_1"
         android:layout_width="0dp"
-        android:layout_height="140dp"
-        android:background="@android:color/holo_green_light"
-        android:gravity="center"
+        android:layout_height="120dp"
         android:layout_marginStart="8dp"
-        android:textAppearance="@style/choose_button_bigger_text_style"
+        android:gravity="center"
+        android:textAppearance="@style/boba_cups_big_text_style"
         app:layout_constraintBottom_toTopOf="@id/tv_option_4"
         app:layout_constraintEnd_toStartOf="@id/tv_option_5"
         app:layout_constraintHorizontal_chainStyle="spread"
         app:layout_constraintStart_toStartOf="parent"
-        tools:text="1" />
+        tools:text="1"
+        app:backgroundTint="@color/dark_slate_gray"
+        android:background="@drawable/button_choose_background"
+        />
 
-    <TextView
+    <Button
         android:id="@+id/tv_option_2"
         android:layout_width="0dp"
-        android:layout_height="140dp"
-        android:background="@android:color/holo_orange_light"
+        android:layout_height="120dp"
         android:gravity="center"
-        android:textAppearance="@style/choose_button_bigger_text_style"
+        android:textAppearance="@style/boba_cups_big_text_style"
         app:layout_constraintBottom_toTopOf="@id/tv_option_4"
         app:layout_constraintEnd_toStartOf="@id/tv_option_6"
         app:layout_constraintStart_toEndOf="@id/tv_option_4"
-        tools:text="2" />
+        tools:text="2"
+        app:backgroundTint="@color/royal_blue"
+        android:background="@drawable/button_choose_background"/>
 
-    <TextView
+    <Button
         android:id="@+id/tv_option_3"
         android:layout_width="0dp"
-        android:layout_height="140dp"
-        android:background="@android:color/holo_purple"
-        android:gravity="center"
+        android:layout_height="120dp"
         android:layout_marginEnd="8dp"
-        android:textAppearance="@style/choose_button_bigger_text_style"
+        android:gravity="center"
+        android:textAppearance="@style/boba_cups_big_text_style"
         app:layout_constraintBottom_toTopOf="@id/tv_option_4"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@id/tv_option_5"
-        tools:text="3" />
+        tools:text="3"
+        app:backgroundTint="@color/dark_slate_gray"
+        android:background="@drawable/button_choose_background"/>
 
-    <TextView
+    <Button
         android:id="@+id/tv_option_4"
         android:layout_width="0dp"
-        android:layout_height="140dp"
-        android:background="@android:color/holo_blue_light"
-        android:gravity="center"
+        android:layout_height="120dp"
         android:layout_marginStart="8dp"
         android:layout_marginBottom="4dp"
-        android:textAppearance="@style/choose_button_bigger_text_style"
+        android:gravity="center"
+        android:textAppearance="@style/boba_cups_big_text_style"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@id/tv_option_5"
         app:layout_constraintHorizontal_chainStyle="spread"
         app:layout_constraintStart_toStartOf="parent"
-        tools:text="4" />
+        tools:text="4"
+        app:backgroundTint="@color/royal_blue"
+        android:background="@drawable/button_choose_background"/>
 
-    <TextView
+    <Button
         android:id="@+id/tv_option_5"
         android:layout_width="0dp"
-        android:layout_height="140dp"
-        android:background="@android:color/holo_red_light"
-        android:gravity="center"
+        android:layout_height="120dp"
         android:layout_marginBottom="4dp"
-        android:textAppearance="@style/choose_button_bigger_text_style"
+        android:gravity="center"
+        android:textAppearance="@style/boba_cups_big_text_style"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@id/tv_option_6"
         app:layout_constraintStart_toEndOf="@id/tv_option_4"
-        tools:text="5" />
+        tools:text="5"
+        app:backgroundTint="@color/dark_slate_gray"
+        android:background="@drawable/button_choose_background"/>
 
-    <TextView
+    <Button
         android:id="@+id/tv_option_6"
         android:layout_width="0dp"
-        android:layout_height="140dp"
-        android:background="@color/khaki"
-        android:gravity="center"
+        android:layout_height="120dp"
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="4dp"
-        android:textAppearance="@style/choose_button_bigger_text_style"
+        android:gravity="center"
+        android:textAppearance="@style/boba_cups_big_text_style"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@id/tv_option_5"
-        tools:text="6" />
-
-
+        tools:text="6"
+        app:backgroundTint="@color/royal_blue"
+        android:background="@drawable/button_choose_background"
+/>
 
     <ProgressBar
         android:id="@+id/progress_bar"
-        style="@style/MyProgressBar"
+
         android:layout_width="0dp"
-        android:layout_height="60dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginBottom="4dp"
+        android:layout_height="40dp"
         android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
+        android:layout_marginBottom="4dp"
         android:max="100"
         app:layout_constraintBottom_toTopOf="@+id/tv_option_2"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        style="@style/MyProgressBar"/>
+
+    <TextView
+        android:id="@+id/first_number_text"
+        android:layout_width="0dp"
+        android:layout_height="120dp"
+        android:text="1"
+        app:layout_constraintBottom_toTopOf="@+id/tv_answers_progress"
+        app:layout_constraintEnd_toStartOf="@+id/arithmetic_operation_sign"
+        app:layout_constraintHorizontal_bias="0.5"
+        android:layout_marginStart="8dp"
+        app:layout_constraintHorizontal_chainStyle="packed"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_timer"
+        app:layout_constraintVertical_bias="0.5"
+        android:gravity="center"
+        android:textAppearance="@style/boba_cups_big_text_style"
+/>
+
+    <TextView
+        android:id="@+id/arithmetic_operation_sign"
+        android:layout_width="30dp"
+        android:layout_height="120dp"
+        android:text="@string/multiplication"
+        app:layout_constraintBottom_toTopOf="@+id/tv_answers_progress"
+        app:layout_constraintEnd_toStartOf="@+id/second_number_text"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/first_number_text"
+        app:layout_constraintTop_toBottomOf="@+id/tv_timer"
+        app:layout_constraintVertical_bias="0.5"
+        android:gravity="center"
+        android:textAppearance="@style/boba_cups_text_style"/>
+
+    <TextView
+        android:id="@+id/second_number_text"
+        android:layout_width="0dp"
+        android:layout_height="120dp"
+        android:text="@string/question_mark"
+        app:layout_constraintBottom_toTopOf="@+id/tv_answers_progress"
+        app:layout_constraintEnd_toStartOf="@+id/equalSign"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/arithmetic_operation_sign"
+        app:layout_constraintTop_toBottomOf="@+id/tv_timer"
+        app:layout_constraintVertical_bias="0.5"
+        android:gravity="center"
+        android:textAppearance="@style/boba_cups_big_text_style" />
+
+    <TextView
+        android:id="@+id/equalSign"
+        android:layout_width="30dp"
+        android:layout_height="120dp"
+        android:text="@string/equal_sign"
+        app:layout_constraintBottom_toTopOf="@+id/tv_answers_progress"
+        app:layout_constraintEnd_toStartOf="@+id/result_number_text"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/second_number_text"
+        app:layout_constraintTop_toBottomOf="@+id/tv_timer"
+        app:layout_constraintVertical_bias="0.5"
+        android:textAppearance="@style/boba_cups_text_style"
+        android:gravity="center"/>
+
+    <TextView
+        android:id="@+id/result_number_text"
+        android:layout_width="0dp"
+        android:layout_height="120dp"
+        android:text="3"
+        app:layout_constraintBottom_toTopOf="@+id/tv_answers_progress"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginEnd="8dp"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/equalSign"
+        app:layout_constraintTop_toBottomOf="@+id/tv_timer"
+        app:layout_constraintVertical_bias="0.5"
+        android:gravity="center"
+        android:textAppearance="@style/boba_cups_big_text_style" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
 

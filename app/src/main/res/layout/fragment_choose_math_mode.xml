@@ -20,7 +20,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintVertical_bias="0.25"
-        android:textAppearance="@style/choose_button_bigger_text_style"
+        android:textAppearance="@style/boba_cups_big_text_style"
         android:background="@drawable/button_choose_background"
         app:backgroundTint="@color/khaki"
         />
@@ -39,7 +39,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintVertical_bias="0.50"
-        android:textAppearance="@style/choose_button_bigger_text_style"
+        android:textAppearance="@style/boba_cups_big_text_style"
         android:background="@drawable/button_choose_background"
         app:backgroundTint="@color/forest_green"/>
 
@@ -59,7 +59,7 @@ android:gravity="center"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintVertical_bias="0.75"
-        android:textAppearance="@style/choose_button_bigger_text_style"
+        android:textAppearance="@style/boba_cups_big_text_style"
         android:background="@drawable/button_choose_background"
         app:backgroundTint="@color/goldenrod"/>
 
@@ -77,7 +77,7 @@ android:gravity="center"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintVertical_bias="1.0"
-        android:textAppearance="@style/choose_button_bigger_text_style"
+        android:textAppearance="@style/boba_cups_big_text_style"
         android:background="@drawable/button_choose_background"
         app:backgroundTint="@color/tomato"/>
 

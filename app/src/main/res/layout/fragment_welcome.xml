@@ -34,14 +34,13 @@
             android:id="@+id/tv_title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="center"
             android:layout_marginTop="20dp"
-            android:layout_marginBottom="4dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginEnd="8dp"
+            android:gravity="center"
             android:text="@string/welcome_title"
-            android:textAppearance="@style/choose_button_text_style_small_shadow"
+            android:textAppearance="@style/boba_cups_big_text_style"
             android:textSize="24sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/iv_logo" />
 
         <TextView
@@ -49,14 +48,12 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
-            android:layout_marginBottom="4dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginEnd="8dp"
             android:text="@string/game_rules"
-            android:textAppearance="@style/choose_button_text_style"
+            android:textAppearance="@style/boba_cups_text_style"
             android:textSize="24sp"
-            app:layout_constraintTop_toBottomOf="@+id/tv_title"
-            tools:layout_editor_absoluteX="8dp" />
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_title" />
 
         <Button
             android:id="@+id/button_understand"
@@ -69,7 +66,7 @@
             android:layout_marginEnd="8dp"
             android:background="@drawable/button_choose_background"
             android:text="@string/button_understand"
-            android:textAppearance="@style/choose_button_text_style_small_shadow"
+            android:textAppearance="@style/boba_cups_text_style_small_shadow"
             app:backgroundTint="@color/royal_blue"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"

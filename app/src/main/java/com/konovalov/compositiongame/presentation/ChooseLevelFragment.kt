@@ -13,12 +13,19 @@ import com.konovalov.compositiongame.domain.entity.MathMode
 import java.util.logging.Level
 
 class ChooseLevelFragment : Fragment() {
+    private lateinit var mathMode: MathMode
+
     private var _binding: FragmentChooseLevelBinding? = null
     private val binding: FragmentChooseLevelBinding
         get() = _binding ?: throw RuntimeException("FragmentChooseLevelBinding is equal to null")
 
     override fun onAttach(activity: Activity) {
         super.onAttach(activity)
+    }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        parseArgs()
     }
 
     override fun onCreateView(
@@ -33,17 +40,17 @@ class ChooseLevelFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.apply {
-            easyButton.setOnClickListener {
-                launchGameFragment(DifficultyLevel.EASY, MathMode.ADDITION)
+            easyLevelButton.setOnClickListener {
+                launchGameFragment(DifficultyLevel.EASY, mathMode)
             }
-            normalButton.setOnClickListener {
-                launchGameFragment(DifficultyLevel.NORMAL, MathMode.ADDITION)
+            normalLevelButton.setOnClickListener {
+                launchGameFragment(DifficultyLevel.NORMAL, mathMode)
             }
-            hardButton.setOnClickListener {
-                launchGameFragment(DifficultyLevel.HARD, MathMode.ADDITION)
+            hardLevelButton.setOnClickListener {
+                launchGameFragment(DifficultyLevel.HARD, mathMode)
             }
-            testButton.setOnClickListener {
-                launchGameFragment(DifficultyLevel.TEST, MathMode.ADDITION)
+            testLevelButton.setOnClickListener {
+                launchGameFragment(DifficultyLevel.TEST, mathMode)
             }
         }
     }
@@ -65,11 +72,19 @@ class ChooseLevelFragment : Fragment() {
     override fun onDetach() {
         super.onDetach()
     }
-
+    private fun parseArgs(){
+        mathMode = requireArguments().getSerializable(MATH_MODE) as MathMode
+    }
     companion object {
 
-        fun newInstance(): ChooseLevelFragment {
-            return ChooseLevelFragment()
+        private const val MATH_MODE = "mathMode"
+
+        fun newInstance(mathMode: MathMode): ChooseLevelFragment {
+            return ChooseLevelFragment().apply {
+                arguments = Bundle().apply {
+                    putSerializable(MATH_MODE,mathMode)
+                }
+            }
         }
     }
 }

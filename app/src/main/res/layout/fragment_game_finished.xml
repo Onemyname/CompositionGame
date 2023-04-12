@@ -5,22 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/gradient_background"
-    tools:context=".presentation.GameFinishedFragment"
-
-    >
-
-    <ImageView
-        android:id="@+id/emoji_result"
-        android:layout_width="409dp"
-        android:layout_height="250dp"
-        android:contentDescription="@string/game_over"
-        app:layout_constraintBottom_toTopOf="@+id/tv_required_percentage"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_chainStyle="spread_inside"
-        tools:srcCompat="@drawable/congrats" />
+    tools:context=".presentation.GameFinishedFragment">
 
     <TextView
         android:id="@+id/tv_required_answers"
@@ -57,7 +42,8 @@
         app:layout_constraintBottom_toTopOf="@+id/tv_required_answers"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/emoji_result" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_chainStyle="packed" />
 
     <TextView
         android:id="@+id/tv_score_percentage"
@@ -66,7 +52,7 @@
         android:text="@string/score_percentage"
         android:textAppearance="@style/boba_cups_text_style_small_shadow"
         android:textSize="18sp"
-        app:layout_constraintBottom_toTopOf="@+id/button_retry"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tv_score_answers" />
@@ -80,12 +66,7 @@
         android:textAppearance="@style/boba_cups_text_style"
         app:backgroundTint="@color/royal_blue"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_score_percentage"
-        tools:layout_editor_absoluteX="8dp"
-        android:layout_marginBottom="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        />
+        tools:layout_editor_absoluteX="8dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
 

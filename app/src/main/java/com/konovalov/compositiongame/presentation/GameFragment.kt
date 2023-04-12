@@ -62,13 +62,10 @@ class GameFragment: Fragment() {
     }
 
     private  fun launchGameFinishedFragment(gameResult: GameResult){
-        val fragmentManager = requireActivity().supportFragmentManager
-        val current = fragmentManager.findFragmentById(R.id.main_fragment_container)
-        fragmentManager.popBackStack(current!!.tag, FragmentManager.POP_BACK_STACK_INCLUSIVE)
-
-        requireActivity().supportFragmentManager.beginTransaction()
+        requireActivity().supportFragmentManager
+            .beginTransaction()
             .replace(R.id.main_fragment_container, GameFinishedFragment.newInstance(gameResult))
-            .addToBackStack(null)
+            .addToBackStack(GameFragment.NAME)
             .commit()
     }
 
@@ -76,6 +73,7 @@ class GameFragment: Fragment() {
 
         private const val KEY_LEVEL = "level"
         private const val MATH_MODE = "mathMode"
+        const val NAME = "GameFragment"
 
         fun newInstance(difficultyLevel: DifficultyLevel, mathMode: MathMode) : GameFragment{
             return GameFragment().apply {

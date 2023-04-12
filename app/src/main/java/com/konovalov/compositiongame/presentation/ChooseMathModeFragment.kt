@@ -10,6 +10,7 @@ import com.konovalov.compositiongame.R
 import com.konovalov.compositiongame.databinding.FragmentChooseMathModeBinding
 import com.konovalov.compositiongame.databinding.FragmentGameFinishedBinding
 import com.konovalov.compositiongame.databinding.FragmentWelcomeBinding
+import com.konovalov.compositiongame.domain.entity.MathMode
 
 class ChooseMathModeFragment: Fragment()  {
     private  var _binding: FragmentChooseMathModeBinding? = null
@@ -34,6 +35,27 @@ class ChooseMathModeFragment: Fragment()  {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        binding.apply{
+            additionButton.setOnClickListener{
+            launchChooseLevelFragment(MathMode.ADDITION)
+            }
+            subtractionButton.setOnClickListener{
+                launchChooseLevelFragment(MathMode.SUBTRACTION)
+            }
+            multiplicationButton.setOnClickListener{
+                launchChooseLevelFragment(MathMode.MULTIPLICATION)
+            }
+            divisionButton.setOnClickListener{
+                launchChooseLevelFragment(MathMode.DIVISION)
+            }
+        }
+    }
+
+    private fun launchChooseLevelFragment(mathMode: MathMode) {
+        requireActivity().supportFragmentManager.beginTransaction()
+            .replace(R.id.main_fragment_container,ChooseLevelFragment.newInstance(mathMode))
+            .addToBackStack(null)
+            .commit()
     }
 
     override fun onDestroyView() {

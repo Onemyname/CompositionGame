@@ -19,6 +19,9 @@ class ChooseMathModeFragment: Fragment()  {
     override fun onAttach(activity: Activity) {
         super.onAttach(activity)
     }
+    override fun onDetach() {
+        super.onDetach()
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -38,7 +41,11 @@ class ChooseMathModeFragment: Fragment()  {
         _binding = null
     }
 
-    override fun onDetach() {
-        super.onDetach()
+    companion object {
+        fun newInstance() : ChooseMathModeFragment{
+            return ChooseMathModeFragment()
+        }
     }
+
+
 }

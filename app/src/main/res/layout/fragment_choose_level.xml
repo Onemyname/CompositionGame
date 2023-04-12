@@ -6,77 +6,77 @@
     android:layout_height="match_parent">
 
     <Button
-        android:id="@+id/addition_button"
+        android:id="@+id/easy_button"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:text="@string/test"
+        android:text="@string/easy"
         android:layout_marginTop="8dp"
         android:layout_marginBottom="4dp"
         android:layout_marginStart="8dp"
         android:layout_marginEnd="8dp"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toTopOf="@+id/subtraction_button"
+        app:layout_constraintBottom_toTopOf="@+id/normal_button"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintVertical_bias="0.25"
         android:textAppearance="@style/boba_cups_text_style"
         android:background="@drawable/button_choose_background"
-        app:backgroundTint="@color/khaki"/>
+        app:backgroundTint="@color/forest_green"/>
 
     <Button
-        android:id="@+id/subtraction_button"
+        android:id="@+id/normal_button"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginTop="4dp"
         android:layout_marginBottom="4dp"
         android:layout_marginStart="8dp"
         android:layout_marginEnd="8dp"
-        android:text="@string/easy"
-        app:layout_constraintTop_toBottomOf="@+id/addition_button"
-        app:layout_constraintBottom_toTopOf="@+id/multiplication_button"
+        android:text="@string/normal"
+        app:layout_constraintTop_toBottomOf="@+id/easy_button"
+        app:layout_constraintBottom_toTopOf="@+id/hard_button"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintVertical_bias="0.50"
         android:textAppearance="@style/boba_cups_text_style"
         android:background="@drawable/button_choose_background"
-        app:backgroundTint="@color/forest_green"/>
+        app:backgroundTint="@color/goldenrod"/>
 
     <Button
-        android:id="@+id/multiplication_button"
+        android:id="@+id/hard_button"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginTop="4dp"
         android:layout_marginBottom="4dp"
         android:layout_marginStart="8dp"
         android:layout_marginEnd="8dp"
-        android:text="@string/medium"
-        app:layout_constraintTop_toBottomOf="@+id/subtraction_button"
-        app:layout_constraintBottom_toTopOf="@+id/division_button"
+        android:text="@string/hard"
+        app:layout_constraintTop_toBottomOf="@+id/normal_button"
+        app:layout_constraintBottom_toTopOf="@+id/test_button"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintVertical_bias="0.75"
         android:textAppearance="@style/boba_cups_text_style"
         android:background="@drawable/button_choose_background"
-        app:backgroundTint="@color/goldenrod"/>
+        app:backgroundTint="@color/tomato"/>
 
     <Button
 
-        android:id="@+id/division_button"
+        android:id="@+id/test_button"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginTop="4dp"
         android:layout_marginBottom="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginEnd="8dp"
-        android:text="@string/hard"
-        app:layout_constraintTop_toBottomOf="@+id/multiplication_button"
+        android:text="@string/test"
+        app:layout_constraintTop_toBottomOf="@+id/hard_button"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintVertical_bias="1.0"
         android:textAppearance="@style/boba_cups_text_style"
         android:background="@drawable/button_choose_background"
-        app:backgroundTint="@color/tomato"/>
+        app:backgroundTint="@color/khaki"/>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

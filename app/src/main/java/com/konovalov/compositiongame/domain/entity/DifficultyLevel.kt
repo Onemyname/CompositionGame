@@ -1,6 +1,6 @@
 package com.konovalov.compositiongame.domain.entity
 
-enum class Level {
+enum class DifficultyLevel {
 
         TEST, EASY, NORMAL, HARD
 

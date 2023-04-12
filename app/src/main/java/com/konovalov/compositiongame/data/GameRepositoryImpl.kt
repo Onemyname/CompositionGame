@@ -1,7 +1,8 @@
 package com.konovalov.compositiongame.data
 
 import com.konovalov.compositiongame.domain.entity.GameSettings
-import com.konovalov.compositiongame.domain.entity.Level
+import com.konovalov.compositiongame.domain.entity.DifficultyLevel
+import com.konovalov.compositiongame.domain.entity.MathMode
 import com.konovalov.compositiongame.domain.entity.Question
 import com.konovalov.compositiongame.domain.repository.GameRepository
 import java.lang.Math.max
@@ -20,28 +21,28 @@ object GameRepositoryImpl : GameRepository {
         return Question(sum, visibleNumber, answers)
     }
 
-        override fun getGameSettings(level: Level): GameSettings {
+        override fun getGameSettings(difficultyLevel: DifficultyLevel, mathMode: MathMode): GameSettings {
 
-        return when(level){
-            Level.TEST-> GameSettings(
+        return when(difficultyLevel){
+            DifficultyLevel.TEST-> GameSettings(
                10,
                3,
                50,
                8
             )
-            Level.EASY-> GameSettings(
+            DifficultyLevel.EASY-> GameSettings(
                 10,
                 10,
                 70,
                 60
             )
-            Level.NORMAL-> GameSettings(
+            DifficultyLevel.NORMAL-> GameSettings(
                 20,
                 20,
                 80,
                 40
             )
-            Level.HARD->GameSettings(
+            DifficultyLevel.HARD->GameSettings(
                 30,
                 30,
                 90,

@@ -4,7 +4,7 @@ import com.konovalov.compositiongame.domain.entity.MathMode
 import com.konovalov.compositiongame.domain.entity.Question
 import com.konovalov.compositiongame.domain.repository.GameRepository
 
-class GenerateQuestionUeCase(private val repository: GameRepository) {
+class GenerateQuestionUseCase(private val repository: GameRepository) {
 
     operator fun invoke(maxSumValue: Int, mathMode: MathMode): Question{
         return repository.generateQuestion(maxSumValue, COUNT_OF_OPTIONS, mathMode)

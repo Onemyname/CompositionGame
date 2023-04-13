@@ -21,10 +21,6 @@ class GameFragment : Fragment() {
     private val binding: FragmentGameBinding
         get() = _binding ?: throw RuntimeException("FragmentGameBinding is equal to null")
 
-    override fun onAttach(activity: Activity) {
-        super.onAttach(activity)
-    }
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         parseArgs()
@@ -39,18 +35,9 @@ class GameFragment : Fragment() {
         return binding.root
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-
-    }
-
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
-    }
-
-    override fun onDetach() {
-        super.onDetach()
     }
 
     private fun parseArgs() {
@@ -69,7 +56,7 @@ class GameFragment : Fragment() {
         requireActivity().supportFragmentManager
             .beginTransaction()
             .replace(R.id.main_fragment_container, GameFinishedFragment.newInstance(gameResult))
-            .addToBackStack(GameFragment.NAME)
+            .addToBackStack(NAME)
             .commit()
     }
 

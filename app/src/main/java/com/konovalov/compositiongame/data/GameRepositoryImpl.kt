@@ -1,63 +1,48 @@
 package com.konovalov.compositiongame.data
 
-import com.konovalov.compositiongame.data.numbersGenerators.*
+
+import com.konovalov.compositiongame.data.NumbersGenerator.dividend
+import com.konovalov.compositiongame.data.NumbersGenerator.divisior
+import com.konovalov.compositiongame.data.NumbersGenerator.firstSummand
+import com.konovalov.compositiongame.data.NumbersGenerator.minuend
+import com.konovalov.compositiongame.data.NumbersGenerator.multiplicanda
+import com.konovalov.compositiongame.data.NumbersGenerator.multiplier
+import com.konovalov.compositiongame.data.NumbersGenerator.options
+import com.konovalov.compositiongame.data.NumbersGenerator.secondSummand
+import com.konovalov.compositiongame.data.NumbersGenerator.subtrahend
 import com.konovalov.compositiongame.domain.entity.GameSettings
 import com.konovalov.compositiongame.domain.entity.DifficultyLevel
 import com.konovalov.compositiongame.domain.entity.MathMode
 import com.konovalov.compositiongame.domain.entity.MathMode.ADDITION as ADD
 import com.konovalov.compositiongame.domain.entity.MathMode.SUBTRACTION as SUB
-import com.konovalov.compositiongame.domain.entity.MathMode.MULTIPLICATION as MULT
+import com.konovalov.compositiongame.domain.entity.MathMode.MULTIPLICATION as MUL
 import com.konovalov.compositiongame.domain.entity.MathMode.DIVISION as DIV
 import com.konovalov.compositiongame.domain.entity.Question
 import com.konovalov.compositiongame.domain.repository.GameRepository
 
 object GameRepositoryImpl : GameRepository {
-
     override fun generateQuestion(
         maxExpressionNumber: Int,
         countOfOptions: Int,
         mathMode: MathMode
     ): Question {
         val firstNumber: Int = when (mathMode) {
-            ADD -> generateFirstSummand(maxExpressionNumber)
-            SUB -> generateMinuend(maxExpressionNumber)
-            MULT -> generateMultiplicanda(maxExpressionNumber)
-            DIV -> generateDividend(maxExpressionNumber)
+            ADD -> firstSummand(maxExpressionNumber)
+            SUB -> minuend(maxExpressionNumber)
+            MUL -> multiplicanda(maxExpressionNumber)
+            DIV -> dividend(maxExpressionNumber)
         }
 
         val secondNumber: Int = when (mathMode) {
-            ADD -> generateSecondSummand(maxExpressionNumber, firstNumber)
-            SUB -> generateSubtrahend(firstNumber)
-            MULT -> generateMultiplier(maxExpressionNumber, firstNumber)
-            DIV -> generateDivisior(firstNumber)
+            ADD -> secondSummand(maxExpressionNumber, firstNumber)
+            SUB -> subtrahend(firstNumber)
+            MUL -> multiplier(maxExpressionNumber, firstNumber)
+            DIV -> divisior(firstNumber)
         }
 
-        val answers: List<Int> = when (mathMode) {
-            ADD -> generateSumAnswers(
-                maxExpressionNumber,
-                countOfOptions,
-                firstNumber,
-                secondNumber
-            )
-            SUB -> generateDifferenceAnswers(
-                maxExpressionNumber,
-                countOfOptions,
-                firstNumber,
-                secondNumber
-            )
-            MULT -> generateProductAnswers(
-                maxExpressionNumber,
-                countOfOptions,
-                firstNumber,
-                secondNumber
-            )
-            DIV -> generateQuotientAnswers(
-                maxExpressionNumber,
-                countOfOptions,
-                firstNumber,
-                secondNumber
-            )
-        }
+        val answers: List<Int> =
+            options(maxExpressionNumber, countOfOptions, firstNumber, secondNumber, mathMode)
+
 
         return Question(firstNumber, secondNumber, answers)
     }

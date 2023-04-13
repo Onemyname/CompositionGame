@@ -18,10 +18,6 @@ class ChooseLevelFragment : Fragment() {
     private val binding: FragmentChooseLevelBinding
         get() = _binding ?: throw RuntimeException("FragmentChooseLevelBinding is equal to null")
 
-    override fun onAttach(activity: Activity) {
-        super.onAttach(activity)
-    }
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         parseArgs()
@@ -67,10 +63,6 @@ class ChooseLevelFragment : Fragment() {
         _binding = null
     }
 
-
-    override fun onDetach() {
-        super.onDetach()
-    }
 
     private fun parseArgs() {
         requireArguments().getParcelable<MathMode>(MATH_MODE)?.let {

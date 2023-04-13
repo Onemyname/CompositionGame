@@ -19,10 +19,6 @@ class GameFinishedFragment : Fragment() {
     private val binding: FragmentGameFinishedBinding
         get() = _binding ?: throw RuntimeException("FragmentGameFinishedBinding is equal to null")
 
-    override fun onAttach(activity: Activity) {
-        super.onAttach(activity)
-    }
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         parseArgs()
@@ -69,10 +65,6 @@ class GameFinishedFragment : Fragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
-    }
-
-    override fun onDetach() {
-        super.onDetach()
     }
 
     private fun parseArgs() {

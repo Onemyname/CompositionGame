@@ -15,14 +15,6 @@ class ChooseMathModeFragment : Fragment() {
     private val binding: FragmentChooseMathModeBinding
         get() = _binding ?: throw RuntimeException("FragmentChooseMathModeBinding is equal to null")
 
-    override fun onAttach(activity: Activity) {
-        super.onAttach(activity)
-    }
-
-    override fun onDetach() {
-        super.onDetach()
-    }
-
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,

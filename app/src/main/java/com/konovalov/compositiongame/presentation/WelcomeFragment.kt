@@ -16,10 +16,6 @@ class WelcomeFragment : Fragment() {
     private val binding: FragmentWelcomeBinding
         get() = _binding ?: throw RuntimeException("FragmentWelcomeBinding is equal to null")
 
-    override fun onAttach(activity: Activity) {
-        super.onAttach(activity)
-    }
-
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -40,10 +36,6 @@ class WelcomeFragment : Fragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
-    }
-
-    override fun onDetach() {
-        super.onDetach()
     }
 
     private fun launchChooseMathModeFragment() {

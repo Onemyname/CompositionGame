@@ -8,8 +8,6 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.konovalov.compositiongame.R
 import com.konovalov.compositiongame.databinding.FragmentChooseMathModeBinding
-import com.konovalov.compositiongame.databinding.FragmentGameFinishedBinding
-import com.konovalov.compositiongame.databinding.FragmentWelcomeBinding
 import com.konovalov.compositiongame.domain.entity.MathMode
 
 class ChooseMathModeFragment : Fragment() {

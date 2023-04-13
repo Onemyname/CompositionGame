@@ -2,7 +2,6 @@ package com.konovalov.compositiongame.presentation
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import androidx.fragment.app.FragmentManager
 import com.konovalov.compositiongame.R
 
 class MainActivity : AppCompatActivity() {

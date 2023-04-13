@@ -6,12 +6,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentManager
 import com.konovalov.compositiongame.R
 import com.konovalov.compositiongame.databinding.FragmentGameBinding
 import com.konovalov.compositiongame.domain.entity.DifficultyLevel
 import com.konovalov.compositiongame.domain.entity.GameResult
-import com.konovalov.compositiongame.domain.entity.GameSettings
 import com.konovalov.compositiongame.domain.entity.MathMode
 
 class GameFragment : Fragment() {
@@ -43,9 +41,7 @@ class GameFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding.tvOption1.setOnClickListener {
-            // TODO()
-        }
+
     }
 
     override fun onDestroyView() {

@@ -10,7 +10,6 @@ import com.konovalov.compositiongame.R
 import com.konovalov.compositiongame.databinding.FragmentChooseLevelBinding
 import com.konovalov.compositiongame.domain.entity.DifficultyLevel
 import com.konovalov.compositiongame.domain.entity.MathMode
-import java.util.logging.Level
 
 class ChooseLevelFragment : Fragment() {
     private lateinit var mathMode: MathMode

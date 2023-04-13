@@ -7,7 +7,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.activity.OnBackPressedCallback
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentManager
 import com.konovalov.compositiongame.R
 import com.konovalov.compositiongame.databinding.FragmentGameFinishedBinding
 import com.konovalov.compositiongame.domain.entity.GameResult

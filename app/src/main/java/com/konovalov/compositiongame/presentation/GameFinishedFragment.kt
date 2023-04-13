@@ -43,15 +43,17 @@ class GameFinishedFragment : Fragment() {
         binding.buttonRetry.setOnClickListener {
             launchWelcomeFragment()
         }
-        requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner, object : OnBackPressedCallback(true) {
-            override fun handleOnBackPressed() {
-                retryGame()
-            }
-        })
+        requireActivity().onBackPressedDispatcher.addCallback(
+            viewLifecycleOwner,
+            object : OnBackPressedCallback(true) {
+                override fun handleOnBackPressed() {
+                    retryGame()
+                }
+            })
     }
 
     private fun retryGame() {
-        requireActivity().supportFragmentManager.apply{
+        requireActivity().supportFragmentManager.apply {
             popBackStack()
             popBackStack()
         }

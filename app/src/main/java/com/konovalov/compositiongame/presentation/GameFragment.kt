@@ -14,14 +14,15 @@ import com.konovalov.compositiongame.domain.entity.GameResult
 import com.konovalov.compositiongame.domain.entity.GameSettings
 import com.konovalov.compositiongame.domain.entity.MathMode
 
-class GameFragment: Fragment() {
+class GameFragment : Fragment() {
 
     private lateinit var difficultyLevel: DifficultyLevel
     private lateinit var mathMode: MathMode
 
-    private  var _binding: FragmentGameBinding? = null
+    private var _binding: FragmentGameBinding? = null
     private val binding: FragmentGameBinding
-    get() = _binding ?: throw RuntimeException("FragmentGameBinding is equal to null")
+        get() = _binding ?: throw RuntimeException("FragmentGameBinding is equal to null")
+
     override fun onAttach(activity: Activity) {
         super.onAttach(activity)
     }
@@ -36,15 +37,19 @@ class GameFragment: Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = FragmentGameBinding.inflate(inflater,container,false)
+        _binding = FragmentGameBinding.inflate(inflater, container, false)
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding.tvOption1.setOnClickListener{
-            launchGameFinishedFragment(GameResult(true,1,1,
-                GameSettings(1,1,1,1)))
+        binding.tvOption1.setOnClickListener {
+            launchGameFinishedFragment(
+                GameResult(
+                    true, 1, 1,
+                    GameSettings(1, 1, 1, 1)
+                )
+            )
         }
     }
 
@@ -56,12 +61,13 @@ class GameFragment: Fragment() {
     override fun onDetach() {
         super.onDetach()
     }
-    private fun parseArgs(){
+
+    private fun parseArgs() {
         difficultyLevel = requireArguments().getSerializable(KEY_LEVEL) as DifficultyLevel
         mathMode = requireArguments().getSerializable(MATH_MODE) as MathMode
     }
 
-    private  fun launchGameFinishedFragment(gameResult: GameResult){
+    private fun launchGameFinishedFragment(gameResult: GameResult) {
         requireActivity().supportFragmentManager
             .beginTransaction()
             .replace(R.id.main_fragment_container, GameFinishedFragment.newInstance(gameResult))
@@ -69,17 +75,17 @@ class GameFragment: Fragment() {
             .commit()
     }
 
-    companion object{
+    companion object {
 
         private const val KEY_LEVEL = "level"
         private const val MATH_MODE = "mathMode"
         const val NAME = "GameFragment"
 
-        fun newInstance(difficultyLevel: DifficultyLevel, mathMode: MathMode) : GameFragment{
+        fun newInstance(difficultyLevel: DifficultyLevel, mathMode: MathMode): GameFragment {
             return GameFragment().apply {
                 arguments = Bundle().apply {
-                    putSerializable(KEY_LEVEL,difficultyLevel)
-                    putSerializable(MATH_MODE,mathMode)
+                    putSerializable(KEY_LEVEL, difficultyLevel)
+                    putSerializable(MATH_MODE, mathMode)
                 }
             }
         }

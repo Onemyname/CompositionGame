@@ -12,5 +12,5 @@ interface GameRepository {
         countOfOptions: Int
     ): Question
 
-    fun getGameSettings(difficultyLevel: DifficultyLevel, mathMode: MathMode) : GameSettings
+    fun getGameSettings(difficultyLevel: DifficultyLevel, mathMode: MathMode): GameSettings
 }

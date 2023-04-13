@@ -72,9 +72,11 @@ class ChooseLevelFragment : Fragment() {
     override fun onDetach() {
         super.onDetach()
     }
-    private fun parseArgs(){
+
+    private fun parseArgs() {
         mathMode = requireArguments().getSerializable(MATH_MODE) as MathMode
     }
+
     companion object {
 
         private const val MATH_MODE = "mathMode"
@@ -82,7 +84,7 @@ class ChooseLevelFragment : Fragment() {
         fun newInstance(mathMode: MathMode): ChooseLevelFragment {
             return ChooseLevelFragment().apply {
                 arguments = Bundle().apply {
-                    putSerializable(MATH_MODE,mathMode)
+                    putSerializable(MATH_MODE, mathMode)
                 }
             }
         }

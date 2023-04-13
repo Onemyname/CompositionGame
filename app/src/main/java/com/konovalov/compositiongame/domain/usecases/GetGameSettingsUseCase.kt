@@ -7,7 +7,7 @@ import com.konovalov.compositiongame.domain.repository.GameRepository
 
 class GetGameSettingsUseCase(private val repository: GameRepository) {
 
-    operator fun invoke(difficultyLevel: DifficultyLevel, mathMode: MathMode) : GameSettings{
+    operator fun invoke(difficultyLevel: DifficultyLevel, mathMode: MathMode): GameSettings {
         return repository.getGameSettings(difficultyLevel, mathMode)
     }
 }

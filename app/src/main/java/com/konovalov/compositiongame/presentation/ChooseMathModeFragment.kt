@@ -12,14 +12,15 @@ import com.konovalov.compositiongame.databinding.FragmentGameFinishedBinding
 import com.konovalov.compositiongame.databinding.FragmentWelcomeBinding
 import com.konovalov.compositiongame.domain.entity.MathMode
 
-class ChooseMathModeFragment: Fragment()  {
-    private  var _binding: FragmentChooseMathModeBinding? = null
-    private val binding : FragmentChooseMathModeBinding
-    get() = _binding ?: throw RuntimeException("FragmentChooseMathModeBinding is equal to null")
+class ChooseMathModeFragment : Fragment() {
+    private var _binding: FragmentChooseMathModeBinding? = null
+    private val binding: FragmentChooseMathModeBinding
+        get() = _binding ?: throw RuntimeException("FragmentChooseMathModeBinding is equal to null")
 
     override fun onAttach(activity: Activity) {
         super.onAttach(activity)
     }
+
     override fun onDetach() {
         super.onDetach()
     }
@@ -29,23 +30,23 @@ class ChooseMathModeFragment: Fragment()  {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = FragmentChooseMathModeBinding.inflate(inflater,container,false)
+        _binding = FragmentChooseMathModeBinding.inflate(inflater, container, false)
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding.apply{
-            additionButton.setOnClickListener{
-            launchChooseLevelFragment(MathMode.ADDITION)
+        binding.apply {
+            additionButton.setOnClickListener {
+                launchChooseLevelFragment(MathMode.ADDITION)
             }
-            subtractionButton.setOnClickListener{
+            subtractionButton.setOnClickListener {
                 launchChooseLevelFragment(MathMode.SUBTRACTION)
             }
-            multiplicationButton.setOnClickListener{
+            multiplicationButton.setOnClickListener {
                 launchChooseLevelFragment(MathMode.MULTIPLICATION)
             }
-            divisionButton.setOnClickListener{
+            divisionButton.setOnClickListener {
                 launchChooseLevelFragment(MathMode.DIVISION)
             }
         }
@@ -53,7 +54,7 @@ class ChooseMathModeFragment: Fragment()  {
 
     private fun launchChooseLevelFragment(mathMode: MathMode) {
         requireActivity().supportFragmentManager.beginTransaction()
-            .replace(R.id.main_fragment_container,ChooseLevelFragment.newInstance(mathMode))
+            .replace(R.id.main_fragment_container, ChooseLevelFragment.newInstance(mathMode))
             .addToBackStack(null)
             .commit()
     }
@@ -64,7 +65,7 @@ class ChooseMathModeFragment: Fragment()  {
     }
 
     companion object {
-        fun newInstance() : ChooseMathModeFragment{
+        fun newInstance(): ChooseMathModeFragment {
             return ChooseMathModeFragment()
         }
     }

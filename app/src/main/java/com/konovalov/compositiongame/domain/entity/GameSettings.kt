@@ -1,8 +1,15 @@
 package com.konovalov.compositiongame.domain.entity
 
+import android.os.Parcel
+import android.os.Parcelable
+import kotlinx.parcelize.Parcelize
+
+@Parcelize
 class GameSettings(
-    val maxSumValue: Int,
-    val minCountRightAnswers: Int,
-    val minPercentOfRightAnswers: Int,
-    val gameTimeInSeconds: Int
-) : java.io.Serializable
+    private val mathMode: MathMode,
+    private val maxExpressionNumber: Int,
+    private val minCountRightAnswers: Int,
+    private val minPercentOfRightAnswers: Int,
+    private val gameTimeInSeconds: Int
+) : Parcelable {
+}

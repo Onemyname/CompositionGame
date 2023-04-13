@@ -44,12 +44,7 @@ class GameFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.tvOption1.setOnClickListener {
-            launchGameFinishedFragment(
-                GameResult(
-                    true, 1, 1,
-                    GameSettings(1, 1, 1, 1)
-                )
-            )
+            // TODO()
         }
     }
 
@@ -63,8 +58,15 @@ class GameFragment : Fragment() {
     }
 
     private fun parseArgs() {
-        difficultyLevel = requireArguments().getSerializable(KEY_LEVEL) as DifficultyLevel
-        mathMode = requireArguments().getSerializable(MATH_MODE) as MathMode
+        with(requireArguments()){
+            getParcelable<DifficultyLevel>(KEY_LEVEL)?.let{
+                difficultyLevel = it
+            }
+            getParcelable<MathMode>(MATH_MODE)?.let{
+                mathMode = it
+            }
+        }
+
     }
 
     private fun launchGameFinishedFragment(gameResult: GameResult) {
@@ -84,8 +86,8 @@ class GameFragment : Fragment() {
         fun newInstance(difficultyLevel: DifficultyLevel, mathMode: MathMode): GameFragment {
             return GameFragment().apply {
                 arguments = Bundle().apply {
-                    putSerializable(KEY_LEVEL, difficultyLevel)
-                    putSerializable(MATH_MODE, mathMode)
+                    putParcelable(KEY_LEVEL, difficultyLevel)
+                    putParcelable(MATH_MODE, mathMode)
                 }
             }
         }

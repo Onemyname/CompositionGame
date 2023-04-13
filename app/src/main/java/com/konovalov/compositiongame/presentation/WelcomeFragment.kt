@@ -16,7 +16,6 @@ class WelcomeFragment : Fragment() {
     private val binding: FragmentWelcomeBinding
         get() = _binding ?: throw RuntimeException("FragmentWelcomeBinding is equal to null")
 
-
     override fun onAttach(activity: Activity) {
         super.onAttach(activity)
     }
@@ -27,6 +26,7 @@ class WelcomeFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentWelcomeBinding.inflate(inflater, container, false)
+
         return binding.root
     }
 
@@ -46,7 +46,6 @@ class WelcomeFragment : Fragment() {
         super.onDetach()
     }
 
-
     private fun launchChooseMathModeFragment() {
         requireActivity().supportFragmentManager
             .beginTransaction()
@@ -57,7 +56,6 @@ class WelcomeFragment : Fragment() {
 
 
     companion object {
-
         fun newInstance(): WelcomeFragment {
             return WelcomeFragment()
         }

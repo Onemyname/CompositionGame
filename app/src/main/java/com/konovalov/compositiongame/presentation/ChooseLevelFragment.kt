@@ -74,7 +74,9 @@ class ChooseLevelFragment : Fragment() {
     }
 
     private fun parseArgs() {
-        mathMode = requireArguments().getSerializable(MATH_MODE) as MathMode
+        requireArguments().getParcelable<MathMode>(MATH_MODE)?.let {
+            mathMode = it
+        }
     }
 
     companion object {
@@ -84,7 +86,7 @@ class ChooseLevelFragment : Fragment() {
         fun newInstance(mathMode: MathMode): ChooseLevelFragment {
             return ChooseLevelFragment().apply {
                 arguments = Bundle().apply {
-                    putSerializable(MATH_MODE, mathMode)
+                    putParcelable(MATH_MODE, mathMode)
                 }
             }
         }

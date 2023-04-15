@@ -4,34 +4,49 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.konovalov.compositiongame.data.GameRepositoryImpl
+import com.konovalov.compositiongame.domain.entity.DifficultyLevel
 import com.konovalov.compositiongame.domain.entity.GameSettings
+import com.konovalov.compositiongame.domain.entity.MathMode
 import com.konovalov.compositiongame.domain.entity.Question
 import com.konovalov.compositiongame.domain.usecases.GenerateQuestionUseCase
 import com.konovalov.compositiongame.domain.usecases.GetGameSettingsUseCase
 
-class GameViewModel : ViewModel()
+class GameViewModel : ViewModel() {
 
-private val repository: GameRepositoryImpl = GameRepositoryImpl
+    private val repository: GameRepositoryImpl = GameRepositoryImpl
 
-private val generateQuestionUseCase = GenerateQuestionUseCase(repository)
-private val getGenerateQuestionUseCase = GetGameSettingsUseCase(repository)
+    private val generateQuestionUseCase = GenerateQuestionUseCase(repository)
 
-private val _gameSettings = MutableLiveData<GameSettings>()
-val gameSettings: LiveData<GameSettings>
-    get() = _gameSettings
 
-private val _question = MutableLiveData<Question>()
-val question: LiveData<Question>
-    get() = _question
 
-private val _time = MutableLiveData<Int>()
-val time: LiveData<Int>
-    get() = _time
+//    fun getGameSettings(difficultyLevel: DifficultyLevel, mathMode: MathMode) : GameSettings{
+//
+//        return getGameSettingsUseCase.invoke(difficultyLevel,mathMode)
+//    }
 
-private val _countRightAnswers = MutableLiveData<Int>()
-val countRightAnswers: LiveData<Int>
-    get() = _countRightAnswers
+    fun getQuestion(maxSumValue: Int, mathMode: MathMode) : Question{
 
-private val _countAllQuestions = MutableLiveData<Int>()
-val ccountAllQuestions: LiveData<Int>
-    get() = _countAllQuestions
+        return generateQuestionUseCase.invoke(maxSumValue,mathMode)
+    }
+
+
+//    private val _gameSettings = MutableLiveData<GameSettings>()
+//    val gameSettings: LiveData<GameSettings>
+//        get() = _gameSettings
+//    private val _question = MutableLiveData<Question>()
+//    val question: LiveData<Question>
+//        get() = _question
+//
+//    private val _time = MutableLiveData<Int>()
+//    val time: LiveData<Int>
+//        get() = _time
+//
+//    private val _countRightAnswers = MutableLiveData<Int>()
+//    val countRightAnswers: LiveData<Int>
+//        get() = _countRightAnswers
+//
+//    private val _countAllQuestions = MutableLiveData<Int>()
+//    val countAllQuestions: LiveData<Int>
+//        get() = _countAllQuestions
+
+}

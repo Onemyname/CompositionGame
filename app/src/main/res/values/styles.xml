@@ -17,6 +17,10 @@
         <item name="android:textSize">80sp</item>
     </style>
 
+    <style name = "boba_cups_big_text_style_land" parent="boba_cups_text_style">
+        <item name="android:textSize">60sp</item>
+    </style>
+
     <style name="boba_cups_text_style_small_shadow" parent="boba_cups_text_style">
         <item name="android:shadowDx">4</item>
         <item name="android:shadowDy">4</item>

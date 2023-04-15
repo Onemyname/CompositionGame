@@ -22,4 +22,5 @@
     <string name="right_answers">%s out of %s correct answers</string>
     <string name="progress_answers">%s correct answers\n(minimum %s)</string>
     <string name="equal_sign">=</string>
+    <string name="progress_answers_land">%s correct answers (minimum %s)</string>
 </resources>

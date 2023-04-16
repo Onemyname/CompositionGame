@@ -29,7 +29,7 @@
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="4dp"
         android:gravity="center"
-        android:text="@string/progress_answers_land"
+        android:text="@string/progress_answers"
         android:textAppearance="@style/boba_cups_big_text_style"
         android:textSize="18sp"
         app:layout_constraintBottom_toTopOf="@+id/progress_bar"

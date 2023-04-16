@@ -1,18 +1,21 @@
 package com.konovalov.compositiongame.presentation
 
+import android.app.Application
 import android.os.CountDownTimer
+import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
+import com.konovalov.compositiongame.R
 import com.konovalov.compositiongame.data.GameRepositoryImpl
 import com.konovalov.compositiongame.domain.entity.DifficultyLevel
+import com.konovalov.compositiongame.domain.entity.GameResult
 import com.konovalov.compositiongame.domain.entity.GameSettings
 import com.konovalov.compositiongame.domain.entity.MathMode
 import com.konovalov.compositiongame.domain.entity.Question
 import com.konovalov.compositiongame.domain.usecases.GenerateQuestionUseCase
 import com.konovalov.compositiongame.domain.usecases.GetGameSettingsUseCase
 
-class GameViewModel : ViewModel() {
+class GameViewModel(application: Application) : AndroidViewModel(application) {
 
 
     private lateinit var mathMode: MathMode
@@ -21,19 +24,48 @@ class GameViewModel : ViewModel() {
     private val repository: GameRepositoryImpl = GameRepositoryImpl
     private val generateQuestionUseCase = GenerateQuestionUseCase(repository)
     private val getGameSettingsUseCase = GetGameSettingsUseCase(repository)
-    private val _formattedTime = MutableLiveData<String>()
-    private var timer : CountDownTimer? = null
-    val formattedTime: LiveData<String>
-        get() = _formattedTime
+    private var timer: CountDownTimer? = null
+    private var countOfRightAnswers = 0
+    private var countOfQuestions = 0
+    private val context = application
 
-    private var _question = MutableLiveData<Question>()
+    private val _formattedTime = MutableLiveData<String>()
+    val formattedTime: LiveData<String>
+        get() = _progressAnswers
+
+    private val _question = MutableLiveData<Question>()
     val question: LiveData<Question>
         get() = _question
 
-    fun getGameSettings(difficultyLevel: DifficultyLevel, mathMode: MathMode) {
+    private val _percentOfRightAnswer = MutableLiveData<Int>()
+    val percentOfRightAnswer: LiveData<Int>
+        get() = _percentOfRightAnswer
+
+    private val _progressAnswers = MutableLiveData<String>()
+    val progressAnswers: LiveData<String>
+        get() = _progressAnswers
+
+    private val _enoughRightAnswers = MutableLiveData<Boolean>()
+    val enoughCount: LiveData<Boolean>
+        get() = _enoughRightAnswers
+
+    private val _enoughPercent = MutableLiveData<Boolean>()
+    val enoughPercent: LiveData<Boolean>
+        get() = _enoughPercent
+
+    private val _minPercent = MutableLiveData<Int>()
+    val minPercent: LiveData<Int>
+        get() = _minPercent
+
+    private val _gameResult = MutableLiveData<GameResult>()
+    val gameResult: LiveData<GameResult>
+        get() = _gameResult
+
+    private fun getGameSettings(difficultyLevel: DifficultyLevel, mathMode: MathMode) {
         this.difficultyLevel = difficultyLevel
         this.mathMode = mathMode
         this.gameSettings = getGameSettingsUseCase(difficultyLevel, mathMode)
+        _minPercent.value = gameSettings.minPercentOfRightAnswers
     }
 
     private fun generateQuestion() {
@@ -41,27 +73,54 @@ class GameViewModel : ViewModel() {
     }
 
     fun startGame(difficultyLevel: DifficultyLevel, mathMode: MathMode) {
-        getGameSettings(difficultyLevel,mathMode)
+        getGameSettings(difficultyLevel, mathMode)
         startTimer()
         generateQuestion()
     }
 
-    fun chooseAnswer(id: Int){
-        val rightAnswer = question.value
+    fun chooseAnswer(number: Int) {
+        checkAnswer(number)
+        updateProgress()
+        generateQuestion()
+    }
+
+    private fun checkAnswer(number: Int) {
+        val rightAnswer = question.value?.rightAnswer
+        if (number == rightAnswer) {
+            countOfRightAnswers++
+        }
+        countOfQuestions++
     }
 
     private fun startTimer() {
         timer = object :
             CountDownTimer(gameSettings.gameTimeInSeconds * MILLIS_IN_SECONDS, MILLIS_IN_SECONDS) {
             override fun onTick(milliSec: Long) {
-                _formattedTime.value =formatTime(milliSec)
+                _progressAnswers.value = formatTime(milliSec)
             }
 
             override fun onFinish() {
-                gameFinish()
+                finishGame()
             }
         }
         timer?.start()
+    }
+
+    private fun updateProgress() {
+        val percent = calculatePercentOfRightAnswers()
+        _percentOfRightAnswer.value = percent
+        _progressAnswers.value = String.format(
+            context.resources.getString(R.string.progress_answers),
+            countOfRightAnswers,
+            gameSettings.minCountRightAnswers
+        )
+        _enoughRightAnswers.value = countOfRightAnswers >= gameSettings.minCountRightAnswers
+        _enoughPercent.value = percent >= gameSettings.minPercentOfRightAnswers
+    }
+
+    private fun calculatePercentOfRightAnswers(): Int {
+
+        return ((countOfRightAnswers / countOfQuestions.toDouble()) * 100).toInt()
     }
 
     fun formatTime(milliSec: Long): String {
@@ -72,8 +131,13 @@ class GameViewModel : ViewModel() {
         return String.format("%02d:%02d", minutes, leftSeconds)
     }
 
-    fun gameFinish() {
-
+    fun finishGame() {
+        _gameResult.value = GameResult(
+            enoughCount.value == true && enoughPercent.value == true,
+            countOfRightAnswers,
+            countOfQuestions,
+            gameSettings
+        )
     }
 
     override fun onCleared() {
@@ -81,26 +145,8 @@ class GameViewModel : ViewModel() {
         timer?.cancel()
     }
 
-
     companion object {
         const val MILLIS_IN_SECONDS = 1000L
         const val SECONDS_IN_MINUTE = 60
     }
-
-
-//    private val _gameSettings = MutableLiveData<GameSettings>()
-//    val gameSettings: LiveData<GameSettings>
-//        get() = _gameSettings
-
-//
-
-//
-//    private val _countRightAnswers = MutableLiveData<Int>()
-//    val countRightAnswers: LiveData<Int>
-//        get() = _countRightAnswers
-//
-//    private val _countAllQuestions = MutableLiveData<Int>()
-//    val countAllQuestions: LiveData<Int>
-//        get() = _countAllQuestions
-
 }

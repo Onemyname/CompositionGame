@@ -7,7 +7,7 @@ import com.konovalov.compositiongame.data.NumbersGenerator.firstSummand
 import com.konovalov.compositiongame.data.NumbersGenerator.minuend
 import com.konovalov.compositiongame.data.NumbersGenerator.multiplicanda
 import com.konovalov.compositiongame.data.NumbersGenerator.multiplier
-import com.konovalov.compositiongame.data.NumbersGenerator.options
+import com.konovalov.compositiongame.data.NumbersGenerator.getAnswerAndOptions
 import com.konovalov.compositiongame.data.NumbersGenerator.secondSummand
 import com.konovalov.compositiongame.data.NumbersGenerator.subtrahend
 import com.konovalov.compositiongame.domain.entity.GameSettings
@@ -40,11 +40,12 @@ object GameRepositoryImpl : GameRepository {
             DIV -> divisior(firstNumber)
         }
 
-        val answers: List<Int> =
-            options(maxExpressionNumber, countOfOptions, firstNumber, secondNumber, mathMode)
+        val rightAnswerAndOptions: Pair<Int, List<Int>> =
+            getAnswerAndOptions(maxExpressionNumber, countOfOptions, firstNumber, secondNumber, mathMode)
+        val rightAnswer = rightAnswerAndOptions.first
+        val options = rightAnswerAndOptions.second
 
-
-        return Question(firstNumber, secondNumber, answers)
+        return Question(firstNumber, secondNumber, rightAnswer, options)
     }
 
     override fun getGameSettings(

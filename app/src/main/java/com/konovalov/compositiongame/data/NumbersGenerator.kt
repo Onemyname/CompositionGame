@@ -73,13 +73,13 @@ object NumbersGenerator {
 
     //answer options including only one correct
 
-    fun options(
+    fun getAnswerAndOptions(
         maxExpressionNumber: Int,
         countOfOptions: Int,
         firstNumber: Int,
         secondNumber: Int,
         mathMode: MathMode
-    ): List<Int> {
+    ): Pair<Int,List<Int>> {
         val options = HashSet<Int>()
         val rightAnswer = when (mathMode) {
             ADDITION -> firstNumber + secondNumber
@@ -93,6 +93,6 @@ object NumbersGenerator {
         while (options.size < countOfOptions) {
             options.add(Random.nextInt(from, to))
         }
-        return options.toList()
+        return Pair(rightAnswer, options.toList())
     }
 }

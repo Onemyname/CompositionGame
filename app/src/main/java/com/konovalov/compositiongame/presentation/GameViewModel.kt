@@ -69,13 +69,14 @@ class GameViewModel(application: Application) : AndroidViewModel(application) {
     }
 
     private fun generateQuestion() {
-        generateQuestionUseCase.invoke(gameSettings.maxExpressionNumber, mathMode)
+        _question.value = generateQuestionUseCase(gameSettings.maxExpressionNumber, mathMode)
     }
 
     fun startGame(difficultyLevel: DifficultyLevel, mathMode: MathMode) {
         getGameSettings(difficultyLevel, mathMode)
         startTimer()
         generateQuestion()
+        updateProgress()
     }
 
     fun chooseAnswer(number: Int) {

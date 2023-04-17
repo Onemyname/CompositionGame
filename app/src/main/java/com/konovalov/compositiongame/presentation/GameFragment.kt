@@ -1,11 +1,11 @@
 package com.konovalov.compositiongame.presentation
 
-import android.app.Activity
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
 import com.konovalov.compositiongame.R
 import com.konovalov.compositiongame.databinding.FragmentGameBinding
 import com.konovalov.compositiongame.domain.entity.DifficultyLevel
@@ -16,6 +16,14 @@ class GameFragment : Fragment() {
 
     private lateinit var difficultyLevel: DifficultyLevel
     private lateinit var mathMode: MathMode
+    private val  gameViewModel: GameViewModel by lazy{
+        ViewModelProvider(
+            this,
+            ViewModelProvider
+                .AndroidViewModelFactory
+                .getInstance(requireActivity().application)
+        )[GameViewModel::class.java]
+    }
 
     private var _binding: FragmentGameBinding? = null
     private val binding: FragmentGameBinding
@@ -33,6 +41,12 @@ class GameFragment : Fragment() {
     ): View {
         _binding = FragmentGameBinding.inflate(inflater, container, false)
         return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        gameViewModel.startGame(difficultyLevel, mathMode)
+
     }
 
     override fun onDestroyView() {

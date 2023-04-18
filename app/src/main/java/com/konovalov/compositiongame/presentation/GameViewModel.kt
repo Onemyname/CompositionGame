@@ -61,6 +61,10 @@ class GameViewModel(application: Application) : AndroidViewModel(application) {
     val gameResult: LiveData<GameResult>
         get() = _gameResult
 
+    init{
+        startGame(difficultyLevel, mathMode)
+    }
+
     private fun getGameSettings(difficultyLevel: DifficultyLevel, mathMode: MathMode) {
         this.difficultyLevel = difficultyLevel
         this.mathMode = mathMode
@@ -120,7 +124,9 @@ class GameViewModel(application: Application) : AndroidViewModel(application) {
     }
 
     private fun calculatePercentOfRightAnswers(): Int {
-
+            if(countOfRightAnswers == 0){
+                return 0
+            }
         return ((countOfRightAnswers / countOfQuestions.toDouble()) * 100).toInt()
     }
 

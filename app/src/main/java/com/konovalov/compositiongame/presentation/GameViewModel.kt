@@ -37,9 +37,9 @@ class GameViewModel(application: Application) : AndroidViewModel(application) {
     val question: LiveData<Question>
         get() = _question
 
-    private val _percentOfRightAnswer = MutableLiveData<Int>()
+    private val _percentOfRightAnswers = MutableLiveData<Int>()
     val percentOfRightAnswer: LiveData<Int>
-        get() = _percentOfRightAnswer
+        get() = _percentOfRightAnswers
 
     private val _progressAnswers = MutableLiveData<String>()
     val progressAnswers: LiveData<String>
@@ -61,21 +61,6 @@ class GameViewModel(application: Application) : AndroidViewModel(application) {
     val gameResult: LiveData<GameResult>
         get() = _gameResult
 
-    init{
-        startGame(difficultyLevel, mathMode)
-    }
-
-    private fun getGameSettings(difficultyLevel: DifficultyLevel, mathMode: MathMode) {
-        this.difficultyLevel = difficultyLevel
-        this.mathMode = mathMode
-        this.gameSettings = getGameSettingsUseCase(difficultyLevel, mathMode)
-        _minPercent.value = gameSettings.minPercentOfRightAnswers
-    }
-
-    private fun generateQuestion() {
-        _question.value = generateQuestionUseCase(gameSettings.maxExpressionNumber, mathMode)
-    }
-
     fun startGame(difficultyLevel: DifficultyLevel, mathMode: MathMode) {
         getGameSettings(difficultyLevel, mathMode)
         startTimer()
@@ -89,31 +74,9 @@ class GameViewModel(application: Application) : AndroidViewModel(application) {
         generateQuestion()
     }
 
-    private fun checkAnswer(number: Int) {
-        val rightAnswer = question.value?.rightAnswer
-        if (number == rightAnswer) {
-            countOfRightAnswers++
-        }
-        countOfQuestions++
-    }
-
-    private fun startTimer() {
-        timer = object :
-            CountDownTimer(gameSettings.gameTimeInSeconds * MILLIS_IN_SECONDS, MILLIS_IN_SECONDS) {
-            override fun onTick(milliSec: Long) {
-                _progressAnswers.value = formatTime(milliSec)
-            }
-
-            override fun onFinish() {
-                finishGame()
-            }
-        }
-        timer?.start()
-    }
-
     private fun updateProgress() {
         val percent = calculatePercentOfRightAnswers()
-        _percentOfRightAnswer.value = percent
+        _percentOfRightAnswers.value = percent
         _progressAnswers.value = String.format(
             context.resources.getString(R.string.progress_answers),
             countOfRightAnswers,
@@ -124,10 +87,49 @@ class GameViewModel(application: Application) : AndroidViewModel(application) {
     }
 
     private fun calculatePercentOfRightAnswers(): Int {
-            if(countOfRightAnswers == 0){
+            if(countOfQuestions == 0){
                 return 0
             }
+
         return ((countOfRightAnswers / countOfQuestions.toDouble()) * 100).toInt()
+    }
+
+    private fun checkAnswer(number: Int) {
+        val rightAnswer = question.value?.rightAnswer
+        if (number == rightAnswer) {
+            countOfRightAnswers++
+        }
+        countOfQuestions++
+    }
+
+    private fun getGameSettings(difficultyLevel: DifficultyLevel, mathMode: MathMode) {
+        this.difficultyLevel = difficultyLevel
+        this.mathMode = mathMode
+        this.gameSettings = getGameSettingsUseCase(difficultyLevel, mathMode)
+        _minPercent.value = gameSettings.minPercentOfRightAnswers
+    }
+
+    private fun startTimer() {
+        timer = object : CountDownTimer(
+            gameSettings.gameTimeInSeconds * MILLIS_IN_SECONDS,
+            MILLIS_IN_SECONDS
+        ) {
+            override fun onTick(milliSec: Long) {
+                _formattedTime.value = formatTime(milliSec)
+            }
+
+            override fun onFinish() {
+                finishGame()
+            }
+        }
+        timer?.start()
+    }
+
+    private fun generateQuestion() {
+        _question.value = generateQuestionUseCase(
+            gameSettings.maxExpressionNumber,
+            gameSettings.mathMode
+        )
     }
 
     fun formatTime(milliSec: Long): String {

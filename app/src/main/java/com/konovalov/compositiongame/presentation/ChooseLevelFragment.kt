@@ -33,7 +33,7 @@ class ChooseLevelFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding.apply {
+        with(binding){
             easyLevelButton.setOnClickListener {
                 launchGameFragment(DifficultyLevel.EASY, mathMode)
             }

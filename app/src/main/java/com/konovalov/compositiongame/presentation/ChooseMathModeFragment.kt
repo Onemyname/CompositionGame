@@ -26,7 +26,7 @@ class ChooseMathModeFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding.apply {
+        with(binding) {
             additionButton.setOnClickListener {
                 launchChooseLevelFragment(MathMode.ADDITION)
             }

@@ -5,10 +5,11 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
+import android.widget.Button
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.ViewModelProvider.AndroidViewModelFactory
 import com.konovalov.compositiongame.R
 import com.konovalov.compositiongame.databinding.FragmentGameBinding
 import com.konovalov.compositiongame.domain.entity.DifficultyLevel
@@ -19,8 +20,9 @@ class GameFragment : Fragment() {
 
     private lateinit var difficultyLevel: DifficultyLevel
     private lateinit var mathMode: MathMode
+
     private val tvOptions by lazy {
-        mutableListOf<TextView>().apply {
+        mutableListOf<Button>().apply {
             add(binding.tvOption1)
             add(binding.tvOption2)
             add(binding.tvOption3)
@@ -29,12 +31,10 @@ class GameFragment : Fragment() {
             add(binding.tvOption6)
         }
     }
-    private val gameViewModel: GameViewModel by lazy {
+    private val viewModel: GameViewModel by lazy {
         ViewModelProvider(
             this,
-            ViewModelProvider
-                .AndroidViewModelFactory
-                .getInstance(requireActivity().application)
+            AndroidViewModelFactory.getInstance(requireActivity().application)
         )[GameViewModel::class.java]
     }
 
@@ -53,54 +53,55 @@ class GameFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentGameBinding.inflate(inflater, container, false)
+
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        binding.arithmeticOperationSign.text = setSign(mathMode)
         observeGameViewModel()
         setClickListenersToOptions()
-        gameViewModel.startGame(difficultyLevel,mathMode)
+        viewModel.startGame(difficultyLevel,mathMode)
     }
 
     private fun setClickListenersToOptions(){
         for(tvOption in tvOptions){
             tvOption.setOnClickListener{
-                gameViewModel.chooseAnswer(tvOption.text.toString().toInt())
+                viewModel.chooseAnswer(tvOption.text.toString().toInt())
             }
         }
     }
 
     private fun observeGameViewModel() {
-        gameViewModel.question.observe(viewLifecycleOwner) {
-            binding.arithmeticOperationSign.text = setSign(mathMode)
+        viewModel.question.observe(viewLifecycleOwner) {
             binding.firstNumberText.text = it.firstNumber.toString()
             binding.secondNumberText.text = it.secondNumber.toString()
             for (i in 0 until tvOptions.size) {
                 tvOptions[i].text = it.options[i].toString()
             }
         }
-        gameViewModel.percentOfRightAnswer.observe(viewLifecycleOwner) {
+        viewModel.percentOfRightAnswer.observe(viewLifecycleOwner) {
             binding.progressBar.setProgress(it, true)
         }
-        gameViewModel.enoughCount.observe(viewLifecycleOwner) {
+        viewModel.enoughCount.observe(viewLifecycleOwner) {
             val color = getColorByState(it)
             binding.tvAnswersProgress.setTextColor(color)
         }
-        gameViewModel.enoughPercent.observe(viewLifecycleOwner){
+        viewModel.enoughPercent.observe(viewLifecycleOwner){
             val color = getColorByState(it)
             binding.progressBar.progressTintList = ColorStateList.valueOf(color)
         }
-        gameViewModel.formattedTime.observe(viewLifecycleOwner){
+        viewModel.formattedTime.observe(viewLifecycleOwner){
             binding.tvTimer.text = it
         }
-        gameViewModel.minPercent.observe(viewLifecycleOwner){
+        viewModel.minPercent.observe(viewLifecycleOwner){
             binding.progressBar.secondaryProgress = it
         }
-        gameViewModel.gameResult.observe(viewLifecycleOwner){
+        viewModel.gameResult.observe(viewLifecycleOwner){
             launchGameFinishedFragment(it)
         }
-        gameViewModel.progressAnswers.observe(viewLifecycleOwner){
+        viewModel.progressAnswers.observe(viewLifecycleOwner){
             binding.tvAnswersProgress.text = it
         }
 
@@ -142,7 +143,7 @@ class GameFragment : Fragment() {
         requireActivity().supportFragmentManager
             .beginTransaction()
             .replace(R.id.main_fragment_container, GameFinishedFragment.newInstance(gameResult))
-            .addToBackStack(NAME)
+            .addToBackStack(null)
             .commit()
     }
 
@@ -150,7 +151,6 @@ class GameFragment : Fragment() {
 
         private const val KEY_LEVEL = "level"
         private const val MATH_MODE = "mathMode"
-        const val NAME = "GameFragment"
 
         fun newInstance(difficultyLevel: DifficultyLevel, mathMode: MathMode): GameFragment {
             return GameFragment().apply {

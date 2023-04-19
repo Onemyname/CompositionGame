@@ -1,7 +1,10 @@
 package com.konovalov.compositiongame.data
 
 import com.konovalov.compositiongame.domain.entity.MathMode
-import com.konovalov.compositiongame.domain.entity.MathMode.*
+import com.konovalov.compositiongame.domain.entity.MathMode.ADDITION
+import com.konovalov.compositiongame.domain.entity.MathMode.DIVISION
+import com.konovalov.compositiongame.domain.entity.MathMode.MULTIPLICATION
+import com.konovalov.compositiongame.domain.entity.MathMode.SUBTRACTION
 import kotlin.math.max
 import kotlin.math.min
 import kotlin.random.Random
@@ -76,10 +79,9 @@ object NumbersGenerator {
     }
 
 
-
     fun divisor(firstNumber: Int): Int {
         val possibleDivisors: HashSet<Int> = HashSet()
-        for (i in SECOND_VALUE until firstNumber-1) {
+        for (i in SECOND_VALUE until firstNumber - 1) {
             if (firstNumber % i == 0) {
                 possibleDivisors.add(i)
             }
@@ -87,13 +89,11 @@ object NumbersGenerator {
         if (possibleDivisors.size != 1 && possibleDivisors.contains(firstNumber)) {
             possibleDivisors.remove(firstNumber)
         }
-        if(possibleDivisors.size == 0){
+        if (possibleDivisors.size == 0) {
             possibleDivisors.add(firstNumber)
         }
         return possibleDivisors.random()
     }
-
-
 
 
     //answer options including only one correct

@@ -1,8 +1,9 @@
+@file:Suppress("unused")
+
 package com.konovalov.compositiongame.presentation
 
 import android.app.Application
 import android.os.CountDownTimer
-import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -69,16 +70,16 @@ class GameViewModel(
     val gameTimer: LiveData<CountDownTimer>
         get() = _timer
 
-    init{
+    init {
         startGame()
     }
 
     private fun startGame() {
         getGameSettings()
-        if(_timer.value == null){
+        if (_timer.value == null) {
             startTimer()
         }
-        if(_question.value == null){
+        if (_question.value == null) {
             generateQuestion()
         }
         updateProgress()
@@ -105,9 +106,9 @@ class GameViewModel(
     }
 
     private fun calculatePercentOfRightAnswers(): Int {
-            if(countOfQuestions == 0){
-                return 0
-            }
+        if (countOfQuestions == 0) {
+            return 0
+        }
 
         return ((countOfRightAnswers / countOfQuestions.toDouble()) * 100).toInt()
     }
@@ -138,7 +139,7 @@ class GameViewModel(
                 finishGame()
             }
         }
-       _timer.value?.start()
+        _timer.value?.start()
     }
 
     private fun generateQuestion() {
@@ -170,9 +171,10 @@ class GameViewModel(
         stopTimer()
     }
 
-    private fun stopTimer(){
+    private fun stopTimer() {
         _timer.value?.cancel()
     }
+
     companion object {
         const val MILLIS_IN_SECONDS = 1000L
         const val SECONDS_IN_MINUTE = 60

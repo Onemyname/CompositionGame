@@ -6,16 +6,16 @@ import androidx.lifecycle.ViewModelProvider
 import com.konovalov.compositiongame.domain.entity.DifficultyLevel
 import com.konovalov.compositiongame.domain.entity.MathMode
 
+@Suppress("UNCHECKED_CAST")
 class GameViewModelFactory(
     private val level: DifficultyLevel,
     private val mathMode: MathMode,
     private val application: Application
-): ViewModelProvider.Factory {
+) : ViewModelProvider.Factory {
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
-        if(modelClass.isAssignableFrom(GameViewModel::class.java)){
-            return GameViewModel(application,level,mathMode) as T
-        }
-        else{
+        if (modelClass.isAssignableFrom(GameViewModel::class.java)) {
+            return GameViewModel(application, level, mathMode) as T
+        } else {
             throw RuntimeException("Unknown view model class $modelClass for GameViewModelFactory")
         }
     }

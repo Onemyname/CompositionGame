@@ -1,3 +1,5 @@
+@file:Suppress("DEPRECATION")
+
 package com.konovalov.compositiongame.presentation
 
 import android.content.res.ColorStateList
@@ -9,7 +11,6 @@ import android.widget.Button
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.ViewModelProvider.AndroidViewModelFactory
 import com.konovalov.compositiongame.R
 import com.konovalov.compositiongame.databinding.FragmentGameBinding
 import com.konovalov.compositiongame.domain.entity.DifficultyLevel

@@ -1,3 +1,5 @@
+@file:Suppress("DEPRECATION")
+
 package com.konovalov.compositiongame.presentation
 
 import android.os.Bundle
@@ -33,7 +35,7 @@ class ChooseLevelFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        with(binding){
+        with(binding) {
             easyLevelButton.setOnClickListener {
                 launchGameFragment(DifficultyLevel.EASY, mathMode)
             }
@@ -49,7 +51,6 @@ class ChooseLevelFragment : Fragment() {
         }
     }
 
-
     private fun launchGameFragment(level: DifficultyLevel, mathMode: MathMode) {
         requireActivity().supportFragmentManager.beginTransaction()
             .replace(R.id.main_fragment_container, GameFragment.newInstance(level, mathMode))
@@ -61,7 +62,6 @@ class ChooseLevelFragment : Fragment() {
         super.onDestroyView()
         _binding = null
     }
-
 
     private fun parseArgs() {
         requireArguments().getParcelable<MathMode>(MATH_MODE)?.let {

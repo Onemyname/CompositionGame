@@ -1,6 +1,7 @@
+@file:Suppress("DEPRECATION")
+
 package com.konovalov.compositiongame.presentation
 
-import android.app.Activity
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -62,7 +63,7 @@ class GameFinishedFragment : Fragment() {
             tvScoreAnswers.text = String.format(
                 getString(R.string.score_answers),
                 gameResult.countOfRightAnswers
-                )
+            )
             tvScorePercentage.text = String.format(
                 getString(R.string.score_percentage),
                 getPercentage()

@@ -9,6 +9,7 @@ import kotlin.random.Random
 object NumbersGenerator {
     private const val MIN_VALUE = 1
     private const val SECOND_VALUE = 2
+    private val listOfDividend = mutableListOf<Int>()
 
     //ADDITION:
 
@@ -55,30 +56,37 @@ object NumbersGenerator {
     //DIVISION
 
     fun dividend(maxExpressionNumber: Int): Int {
-        var number: Int
-        do{
-            number = Random.nextInt(SECOND_VALUE, maxExpressionNumber + 1)
+        fillListOfDividend(maxExpressionNumber)
+
+        return listOfDividend.random()
+
+    }
+
+    private fun fillListOfDividend(maxExpressionNumber: Int) {
+
+        for (i in SECOND_VALUE until maxExpressionNumber + 1) {
+            if (
+                i % 2 == 0
+                || i % 3 == 0
+                || i % 5 == 0
+            )
+                listOfDividend.add(i)
         }
-            while(
-            number % 2 == 0
-            || number % 3 == 0
-            || number % 5 == 0
-            || number % 5 == 0
-            || (2 until number).any{number%it==0}
-        )
-        return number
     }
 
     fun divisor(firstNumber: Int): Int {
         val possibleDivisors: HashSet<Int> = HashSet()
-        for (i in SECOND_VALUE..firstNumber) {
+        for (i in SECOND_VALUE until firstNumber) {
             if (firstNumber % i == 0) {
                 possibleDivisors.add(i)
             }
         }
-            if(possibleDivisors.size != 1 && possibleDivisors.contains(firstNumber)){
-                possibleDivisors.remove(firstNumber)
-            }
+        if (possibleDivisors.size != 1 && possibleDivisors.contains(firstNumber)) {
+            possibleDivisors.remove(firstNumber)
+        }
+        if(possibleDivisors.size == 0){
+            possibleDivisors.add(firstNumber)
+        }
         return possibleDivisors.random()
     }
 
@@ -91,7 +99,7 @@ object NumbersGenerator {
         firstNumber: Int,
         secondNumber: Int,
         mathMode: MathMode
-    ): Pair<Int,List<Int>> {
+    ): Pair<Int, List<Int>> {
         val options = HashSet<Int>()
         val rightAnswer = when (mathMode) {
             ADDITION -> firstNumber + secondNumber

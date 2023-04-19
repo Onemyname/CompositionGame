@@ -2,10 +2,10 @@ package com.konovalov.compositiongame.data
 
 
 import com.konovalov.compositiongame.data.NumbersGenerator.dividend
-import com.konovalov.compositiongame.data.NumbersGenerator.divisior
+import com.konovalov.compositiongame.data.NumbersGenerator.divisor
 import com.konovalov.compositiongame.data.NumbersGenerator.firstSummand
 import com.konovalov.compositiongame.data.NumbersGenerator.minuend
-import com.konovalov.compositiongame.data.NumbersGenerator.multiplicanda
+import com.konovalov.compositiongame.data.NumbersGenerator.multiplicand
 import com.konovalov.compositiongame.data.NumbersGenerator.multiplier
 import com.konovalov.compositiongame.data.NumbersGenerator.getAnswerAndOptions
 import com.konovalov.compositiongame.data.NumbersGenerator.secondSummand
@@ -29,7 +29,7 @@ object GameRepositoryImpl : GameRepository {
         val firstNumber: Int = when (mathMode) {
             ADD -> firstSummand(maxExpressionNumber)
             SUB -> minuend(maxExpressionNumber)
-            MUL -> multiplicanda(maxExpressionNumber)
+            MUL -> multiplicand(maxExpressionNumber)
             DIV -> dividend(maxExpressionNumber)
         }
 
@@ -37,7 +37,7 @@ object GameRepositoryImpl : GameRepository {
             ADD -> secondSummand(maxExpressionNumber, firstNumber)
             SUB -> subtrahend(firstNumber)
             MUL -> multiplier(maxExpressionNumber, firstNumber)
-            DIV -> divisior(firstNumber)
+            DIV -> divisor(firstNumber)
         }
 
         val rightAnswerAndOptions: Pair<Int, List<Int>> =

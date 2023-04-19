@@ -36,7 +36,7 @@ object NumbersGenerator {
 
     //MULTIPLICATION
 
-    fun multiplicanda(maxExpressionNumber: Int): Int {
+    fun multiplicand(maxExpressionNumber: Int): Int {
 
         return Random.nextInt(SECOND_VALUE, maxExpressionNumber / 2)
     }
@@ -55,11 +55,21 @@ object NumbersGenerator {
     //DIVISION
 
     fun dividend(maxExpressionNumber: Int): Int {
-
-        return Random.nextInt(SECOND_VALUE, maxExpressionNumber + 1)
+        var number: Int
+        do{
+            number = Random.nextInt(SECOND_VALUE, maxExpressionNumber + 1)
+        }
+            while(
+            number % 2 == 0
+            || number % 3 == 0
+            || number % 5 == 0
+            || number % 5 == 0
+            || (2 until number).any{number%it==0}
+        )
+        return number
     }
 
-    fun divisior(firstNumber: Int): Int {
+    fun divisor(firstNumber: Int): Int {
         val possibleDivisors: HashSet<Int> = HashSet()
         for (i in SECOND_VALUE..firstNumber) {
             if (firstNumber % i == 0) {

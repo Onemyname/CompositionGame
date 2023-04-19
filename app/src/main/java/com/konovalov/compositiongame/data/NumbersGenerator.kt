@@ -15,87 +15,59 @@ object NumbersGenerator {
 
 
     //ADDITION:
-
-    fun firstSummand(maxExpressionNumber: Int): Int {
-
-        return Random.nextInt(MIN_VALUE, maxExpressionNumber)
-    }
-
-    fun secondSummand(maxExpressionNumber: Int, firstNumber: Int): Int {
-
-        return Random.nextInt(MIN_VALUE, maxExpressionNumber - firstNumber + 1)
-    }
-
-    //SUBTRACTION
-
-    fun subtrahend(firstNumber: Int): Int {
-
-        return Random.nextInt(MIN_VALUE, firstNumber)
-    }
-
-    fun minuend(maxExpressionNumber: Int): Int {
-
-        return Random.nextInt(MIN_VALUE + 1, maxExpressionNumber + 1)
-    }
-
-    //MULTIPLICATION
-
-    fun multiplicand(maxExpressionNumber: Int): Int {
-
-        return Random.nextInt(SECOND_VALUE, maxExpressionNumber / 2)
-    }
-
-    fun multiplier(maxExpressionNumber: Int, firstNumber: Int): Int {
-        val possibleMultipliers = HashSet<Int>()
-        for (i in SECOND_VALUE..firstNumber) {
-            if (firstNumber * i <= maxExpressionNumber) {
-                possibleMultipliers.add(i)
-            }
+    fun generateFirstNumber(maxExpressionNumber: Int, mathMode: MathMode): Int {
+        return when (mathMode) {
+            ADDITION -> Random.nextInt(MIN_VALUE, maxExpressionNumber)
+            SUBTRACTION -> Random.nextInt(MIN_VALUE + 1, maxExpressionNumber + 1)
+            MULTIPLICATION -> Random.nextInt(SECOND_VALUE, maxExpressionNumber / 2)
+            DIVISION -> possibleDividends(maxExpressionNumber).random()
         }
-
-        return possibleMultipliers.random()
     }
 
-    //DIVISION
-
-    private val listOfDividend = mutableListOf<Int>()
-    fun dividend(maxExpressionNumber: Int): Int {
-        fillListOfDividend(maxExpressionNumber)
-
-        return listOfDividend.random()
-
+    fun generateSecondNumber(firstNumber: Int, maxExpressionNumber: Int, mathMode: MathMode): Int {
+        return when (mathMode) {
+            ADDITION -> Random.nextInt(MIN_VALUE, maxExpressionNumber - firstNumber + 1)
+            SUBTRACTION -> Random.nextInt(MIN_VALUE, firstNumber)
+            MULTIPLICATION -> possibleMultipliers(maxExpressionNumber, firstNumber).random()
+            DIVISION -> getDivisor(firstNumber)
+        }
     }
 
-    private fun fillListOfDividend(maxExpressionNumber: Int) {
 
+    private fun possibleDividends(maxExpressionNumber: Int): List<Int> {
+        val list = mutableListOf<Int>()
         for (i in SECOND_VALUE until maxExpressionNumber + 1) {
-            if (
-                i % 2 == 0
-                || i % 3 == 0
-                || i % 5 == 0
-            )
-                listOfDividend.add(i)
+            if (i % 2 == 0 || i % 3 == 0 || i % 5 == 0) list.add(i)
         }
+
+        return list
     }
 
-
-    fun divisor(firstNumber: Int): Int {
+    private fun getDivisor(firstNumber: Int): Int {
         val possibleDivisors: HashSet<Int> = HashSet()
         for (i in SECOND_VALUE until firstNumber) {
             if (firstNumber % i == 0) {
                 possibleDivisors.add(i)
             }
         }
-        if(possibleDivisors.size == 0){
+        if (possibleDivisors.size == 0) {
             return firstNumber
         }
 
         return possibleDivisors.random()
     }
 
+    private fun possibleMultipliers(maxExpressionNumber: Int, firstNumber: Int): HashSet<Int> {
+        val possibleMultipliers = HashSet<Int>()
+        for (i in SECOND_VALUE..firstNumber) {
+            if (firstNumber * i <= maxExpressionNumber) {
+                possibleMultipliers.add(i)
+            }
+        }
+        return possibleMultipliers
+    }
 
     //answer options including only one correct
-
     fun getAnswerAndOptions(
         maxExpressionNumber: Int,
         countOfOptions: Int,

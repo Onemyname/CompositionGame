@@ -1,24 +1,14 @@
 package com.konovalov.compositiongame.data
 
 
-import com.konovalov.compositiongame.data.NumbersGenerator.dividend
-import com.konovalov.compositiongame.data.NumbersGenerator.divisor
-import com.konovalov.compositiongame.data.NumbersGenerator.firstSummand
+import com.konovalov.compositiongame.data.NumbersGenerator.generateFirstNumber
+import com.konovalov.compositiongame.data.NumbersGenerator.generateSecondNumber
 import com.konovalov.compositiongame.data.NumbersGenerator.getAnswerAndOptions
-import com.konovalov.compositiongame.data.NumbersGenerator.minuend
-import com.konovalov.compositiongame.data.NumbersGenerator.multiplicand
-import com.konovalov.compositiongame.data.NumbersGenerator.multiplier
-import com.konovalov.compositiongame.data.NumbersGenerator.secondSummand
-import com.konovalov.compositiongame.data.NumbersGenerator.subtrahend
 import com.konovalov.compositiongame.domain.entity.DifficultyLevel
 import com.konovalov.compositiongame.domain.entity.GameSettings
 import com.konovalov.compositiongame.domain.entity.MathMode
 import com.konovalov.compositiongame.domain.entity.Question
 import com.konovalov.compositiongame.domain.repository.GameRepository
-import com.konovalov.compositiongame.domain.entity.MathMode.ADDITION as ADD
-import com.konovalov.compositiongame.domain.entity.MathMode.DIVISION as DIV
-import com.konovalov.compositiongame.domain.entity.MathMode.MULTIPLICATION as MUL
-import com.konovalov.compositiongame.domain.entity.MathMode.SUBTRACTION as SUB
 
 object GameRepositoryImpl : GameRepository {
     override fun generateQuestion(
@@ -26,21 +16,9 @@ object GameRepositoryImpl : GameRepository {
         countOfOptions: Int,
         mathMode: MathMode
     ): Question {
-        val firstNumber: Int = when (mathMode) {
-            ADD -> firstSummand(maxExpressionNumber)
-            SUB -> minuend(maxExpressionNumber)
-            MUL -> multiplicand(maxExpressionNumber)
-            DIV -> dividend(maxExpressionNumber)
-        }
-
-        val secondNumber: Int = when (mathMode) {
-            ADD -> secondSummand(maxExpressionNumber, firstNumber)
-            SUB -> subtrahend(firstNumber)
-            MUL -> multiplier(maxExpressionNumber, firstNumber)
-            DIV -> divisor(firstNumber)
-        }
-
-        val rightAnswerAndOptions: Pair<Int, List<Int>> =
+        val firstNumber: Int = generateFirstNumber(maxExpressionNumber, mathMode)
+        val secondNumber: Int = generateSecondNumber(firstNumber, maxExpressionNumber, mathMode)
+        val answerAndOptions: Pair<Int, List<Int>> =
             getAnswerAndOptions(
                 maxExpressionNumber,
                 countOfOptions,
@@ -48,10 +26,8 @@ object GameRepositoryImpl : GameRepository {
                 secondNumber,
                 mathMode
             )
-        val rightAnswer = rightAnswerAndOptions.first
-        val options = rightAnswerAndOptions.second
 
-        return Question(firstNumber, secondNumber, rightAnswer, options)
+        return Question(firstNumber, secondNumber, answerAndOptions.first, answerAndOptions.second)
     }
 
     override fun getGameSettings(
@@ -79,7 +55,7 @@ object GameRepositoryImpl : GameRepository {
 
             DifficultyLevel.HARD -> GameSettings(
                 mathMode,
-                100,
+                99,
                 30,
                 90,
                 40

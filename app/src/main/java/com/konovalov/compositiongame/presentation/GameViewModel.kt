@@ -5,6 +5,7 @@ import android.os.CountDownTimer
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
 import com.konovalov.compositiongame.R
 import com.konovalov.compositiongame.data.GameRepositoryImpl
 import com.konovalov.compositiongame.domain.entity.DifficultyLevel
@@ -15,19 +16,22 @@ import com.konovalov.compositiongame.domain.entity.Question
 import com.konovalov.compositiongame.domain.usecases.GenerateQuestionUseCase
 import com.konovalov.compositiongame.domain.usecases.GetGameSettingsUseCase
 
-class GameViewModel(application: Application) : AndroidViewModel(application) {
+class GameViewModel(
+    private val application: Application,
+    private val difficultyLevel: DifficultyLevel,
+    private val mathMode: MathMode
+) : ViewModel() {
 
 
-    private lateinit var mathMode: MathMode
-    private lateinit var difficultyLevel: DifficultyLevel
     private lateinit var gameSettings: GameSettings
+
     private val repository: GameRepositoryImpl = GameRepositoryImpl
+
     private val generateQuestionUseCase = GenerateQuestionUseCase(repository)
     private val getGameSettingsUseCase = GetGameSettingsUseCase(repository)
-    private var timer: CountDownTimer? = null
+
     private var countOfRightAnswers = 0
     private var countOfQuestions = 0
-    private val context = application
 
     private val _formattedTime = MutableLiveData<String>()
     val formattedTime: LiveData<String>
@@ -65,8 +69,12 @@ class GameViewModel(application: Application) : AndroidViewModel(application) {
     val gameTimer: LiveData<CountDownTimer>
         get() = _timer
 
-    fun startGame(difficultyLevel: DifficultyLevel, mathMode: MathMode) {
-        getGameSettings(difficultyLevel, mathMode)
+    init{
+        startGame()
+    }
+
+    private fun startGame() {
+        getGameSettings()
         if(_timer.value == null){
             startTimer()
         }
@@ -86,7 +94,7 @@ class GameViewModel(application: Application) : AndroidViewModel(application) {
         val percent = calculatePercentOfRightAnswers()
         _percentOfRightAnswers.value = percent
         _progressAnswers.value = String.format(
-            context.resources.getString(R.string.progress_answers),
+            application.resources.getString(R.string.progress_answers),
             countOfRightAnswers,
             gameSettings.minCountRightAnswers,
             percent,
@@ -112,9 +120,7 @@ class GameViewModel(application: Application) : AndroidViewModel(application) {
         countOfQuestions++
     }
 
-    private fun getGameSettings(difficultyLevel: DifficultyLevel, mathMode: MathMode) {
-        this.difficultyLevel = difficultyLevel
-        this.mathMode = mathMode
+    private fun getGameSettings() {
         this.gameSettings = getGameSettingsUseCase(difficultyLevel, mathMode)
         _minPercent.value = gameSettings.minPercentOfRightAnswers
     }

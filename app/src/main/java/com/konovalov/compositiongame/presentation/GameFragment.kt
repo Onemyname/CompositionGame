@@ -31,11 +31,12 @@ class GameFragment : Fragment() {
             add(binding.tvOption6)
         }
     }
+
+    private val gameViewModelFactory by lazy {
+        GameViewModelFactory(difficultyLevel, mathMode, requireActivity().application)
+    }
     private val viewModel: GameViewModel by lazy {
-        ViewModelProvider(
-            this,
-            AndroidViewModelFactory.getInstance(requireActivity().application)
-        )[GameViewModel::class.java]
+        ViewModelProvider(this, gameViewModelFactory)[GameViewModel::class.java]
     }
 
     private var _binding: FragmentGameBinding? = null
@@ -62,12 +63,11 @@ class GameFragment : Fragment() {
         binding.arithmeticOperationSign.text = setSign(mathMode)
         observeGameViewModel()
         setClickListenersToOptions()
-        viewModel.startGame(difficultyLevel,mathMode)
     }
 
-    private fun setClickListenersToOptions(){
-        for(tvOption in tvOptions){
-            tvOption.setOnClickListener{
+    private fun setClickListenersToOptions() {
+        for (tvOption in tvOptions) {
+            tvOption.setOnClickListener {
                 viewModel.chooseAnswer(tvOption.text.toString().toInt())
             }
         }
@@ -88,20 +88,20 @@ class GameFragment : Fragment() {
             val color = getColorByState(it)
             binding.tvAnswersProgress.setTextColor(color)
         }
-        viewModel.enoughPercent.observe(viewLifecycleOwner){
+        viewModel.enoughPercent.observe(viewLifecycleOwner) {
             val color = getColorByState(it)
             binding.progressBar.progressTintList = ColorStateList.valueOf(color)
         }
-        viewModel.formattedTime.observe(viewLifecycleOwner){
+        viewModel.formattedTime.observe(viewLifecycleOwner) {
             binding.tvTimer.text = it
         }
-        viewModel.minPercent.observe(viewLifecycleOwner){
+        viewModel.minPercent.observe(viewLifecycleOwner) {
             binding.progressBar.secondaryProgress = it
         }
-        viewModel.gameResult.observe(viewLifecycleOwner){
+        viewModel.gameResult.observe(viewLifecycleOwner) {
             launchGameFinishedFragment(it)
         }
-        viewModel.progressAnswers.observe(viewLifecycleOwner){
+        viewModel.progressAnswers.observe(viewLifecycleOwner) {
             binding.tvAnswersProgress.text = it
         }
     }

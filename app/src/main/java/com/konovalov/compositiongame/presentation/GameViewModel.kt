@@ -31,7 +31,7 @@ class GameViewModel(application: Application) : AndroidViewModel(application) {
 
     private val _formattedTime = MutableLiveData<String>()
     val formattedTime: LiveData<String>
-        get() = _progressAnswers
+        get() = _formattedTime
 
     private val _question = MutableLiveData<Question>()
     val question: LiveData<Question>
@@ -80,7 +80,9 @@ class GameViewModel(application: Application) : AndroidViewModel(application) {
         _progressAnswers.value = String.format(
             context.resources.getString(R.string.progress_answers),
             countOfRightAnswers,
-            gameSettings.minCountRightAnswers
+            gameSettings.minCountRightAnswers,
+            percent,
+            gameSettings.minPercentOfRightAnswers
         )
         _enoughRightAnswers.value = countOfRightAnswers >= gameSettings.minCountRightAnswers
         _enoughPercent.value = percent >= gameSettings.minPercentOfRightAnswers

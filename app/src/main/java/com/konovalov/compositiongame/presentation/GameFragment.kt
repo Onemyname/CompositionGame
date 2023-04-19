@@ -104,7 +104,6 @@ class GameFragment : Fragment() {
         viewModel.progressAnswers.observe(viewLifecycleOwner){
             binding.tvAnswersProgress.text = it
         }
-
     }
 
     private fun getColorByState(it: Boolean): Int {
@@ -115,10 +114,10 @@ class GameFragment : Fragment() {
 
     private fun setSign(mathMode: MathMode): String {
         return when (mathMode) {
-            MathMode.ADDITION -> R.string.addition.toString()
-            MathMode.SUBTRACTION -> R.string.subtraction.toString()
-            MathMode.MULTIPLICATION -> R.string.multiplication.toString()
-            MathMode.DIVISION -> R.string.division.toString()
+            MathMode.ADDITION -> resources.getString(R.string.addition)
+            MathMode.SUBTRACTION -> resources.getString(R.string.subtraction)
+            MathMode.MULTIPLICATION -> resources.getString(R.string.multiplication)
+            MathMode.DIVISION -> resources.getString(R.string.division)
         }
     }
 

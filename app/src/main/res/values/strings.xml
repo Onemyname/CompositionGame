@@ -20,6 +20,6 @@
     <string name="score_percentage">Percentage of correct answers: %s</string>
     <string name="retry">Retry</string>
     <string name="right_answers">%s out of %s correct answers</string>
-    <string name="progress_answers">%s correct answers\n(minimum %s)</string>
+    <string name="progress_answers">%s right questions out of %s\n%s accuracy out of %s</string>
     <string name="equal_sign">=</string>
 </resources>

@@ -35,6 +35,8 @@ class GameFinishedFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        bindViews()
+
         binding.buttonRetry.setOnClickListener {
             launchWelcomeFragment()
         }
@@ -45,6 +47,35 @@ class GameFinishedFragment : Fragment() {
                     retryGame()
                 }
             })
+    }
+
+    private fun bindViews() {
+        with(binding) {
+            tvRequiredAnswers.text = String.format(
+                getString(R.string.required_score),
+                gameResult.gameSettings.minCountRightAnswers
+            )
+            tvRequiredPercentage.text = String.format(
+                getString(R.string.required_percentage),
+                gameResult.gameSettings.minPercentOfRightAnswers
+            )
+            tvScoreAnswers.text = String.format(
+                getString(R.string.score_answers),
+                gameResult.countOfRightAnswers
+                )
+            tvScorePercentage.text = String.format(
+                getString(R.string.score_percentage),
+                getPercentage()
+            )
+        }
+    }
+
+    private fun getPercentage(): Int = with(gameResult) {
+        if (countOfQuestions == 0) {
+            0
+        } else {
+            (countOfRightAnswers.toDouble() / countOfQuestions * 100).toInt()
+        }
     }
 
     private fun retryGame() {

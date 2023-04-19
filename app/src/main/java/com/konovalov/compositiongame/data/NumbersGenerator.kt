@@ -60,14 +60,16 @@ object NumbersGenerator {
     }
 
     fun divisior(firstNumber: Int): Int {
-        val possibleDivisiors: HashSet<Int> = HashSet()
+        val possibleDivisors: HashSet<Int> = HashSet()
         for (i in SECOND_VALUE..firstNumber) {
             if (firstNumber % i == 0) {
-                possibleDivisiors.add(i)
+                possibleDivisors.add(i)
             }
         }
-
-        return possibleDivisiors.random()
+            if(possibleDivisors.size != 1 && possibleDivisors.contains(firstNumber)){
+                possibleDivisors.remove(firstNumber)
+            }
+        return possibleDivisors.random()
     }
 
 

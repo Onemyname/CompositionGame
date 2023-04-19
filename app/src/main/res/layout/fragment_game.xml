@@ -10,11 +10,12 @@
 
     <TextView
         android:id="@+id/tv_timer"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_margin="8dp"
         android:textAppearance="@style/boba_cups_text_style"
         android:textSize="60sp"
+        android:gravity="center_horizontal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"

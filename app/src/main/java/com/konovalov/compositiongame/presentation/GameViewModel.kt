@@ -61,10 +61,18 @@ class GameViewModel(application: Application) : AndroidViewModel(application) {
     val gameResult: LiveData<GameResult>
         get() = _gameResult
 
+    private val _timer = MutableLiveData<CountDownTimer>()
+    val gameTimer: LiveData<CountDownTimer>
+        get() = _timer
+
     fun startGame(difficultyLevel: DifficultyLevel, mathMode: MathMode) {
         getGameSettings(difficultyLevel, mathMode)
-        startTimer()
-        generateQuestion()
+        if(_timer.value == null){
+            startTimer()
+        }
+        if(_question.value == null){
+            generateQuestion()
+        }
         updateProgress()
     }
 
@@ -112,7 +120,7 @@ class GameViewModel(application: Application) : AndroidViewModel(application) {
     }
 
     private fun startTimer() {
-        timer = object : CountDownTimer(
+        _timer.value = object : CountDownTimer(
             gameSettings.gameTimeInSeconds * MILLIS_IN_SECONDS,
             MILLIS_IN_SECONDS
         ) {
@@ -124,7 +132,7 @@ class GameViewModel(application: Application) : AndroidViewModel(application) {
                 finishGame()
             }
         }
-        timer?.start()
+       _timer.value?.start()
     }
 
     private fun generateQuestion() {
@@ -153,9 +161,12 @@ class GameViewModel(application: Application) : AndroidViewModel(application) {
 
     override fun onCleared() {
         super.onCleared()
-        timer?.cancel()
+        stopTimer()
     }
 
+    private fun stopTimer(){
+        _timer.value?.cancel()
+    }
     companion object {
         const val MILLIS_IN_SECONDS = 1000L
         const val SECONDS_IN_MINUTE = 60

@@ -9,7 +9,7 @@ import kotlin.random.Random
 object NumbersGenerator {
     private const val MIN_VALUE = 1
     private const val SECOND_VALUE = 2
-    private val listOfDividend = mutableListOf<Int>()
+
 
     //ADDITION:
 
@@ -55,6 +55,7 @@ object NumbersGenerator {
 
     //DIVISION
 
+    private val listOfDividend = mutableListOf<Int>()
     fun dividend(maxExpressionNumber: Int): Int {
         fillListOfDividend(maxExpressionNumber)
 
@@ -74,9 +75,11 @@ object NumbersGenerator {
         }
     }
 
+
+
     fun divisor(firstNumber: Int): Int {
         val possibleDivisors: HashSet<Int> = HashSet()
-        for (i in SECOND_VALUE until firstNumber) {
+        for (i in SECOND_VALUE until firstNumber-1) {
             if (firstNumber % i == 0) {
                 possibleDivisors.add(i)
             }
@@ -89,6 +92,8 @@ object NumbersGenerator {
         }
         return possibleDivisors.random()
     }
+
+
 
 
     //answer options including only one correct

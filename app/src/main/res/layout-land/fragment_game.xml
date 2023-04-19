@@ -7,13 +7,13 @@
     android:background="@drawable/gradient_background"
     tools:context=".presentation.GameFragment">
 
-
     <TextView
         android:id="@+id/tv_timer"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_margin="8dp"
         android:textAppearance="@style/boba_cups_text_style"
+        android:gravity="center_horizontal"
         android:textSize="40sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

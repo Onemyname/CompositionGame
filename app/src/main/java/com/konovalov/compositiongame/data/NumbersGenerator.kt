@@ -81,17 +81,15 @@ object NumbersGenerator {
 
     fun divisor(firstNumber: Int): Int {
         val possibleDivisors: HashSet<Int> = HashSet()
-        for (i in SECOND_VALUE until firstNumber - 1) {
+        for (i in SECOND_VALUE until firstNumber) {
             if (firstNumber % i == 0) {
                 possibleDivisors.add(i)
             }
         }
-        if (possibleDivisors.size != 1 && possibleDivisors.contains(firstNumber)) {
-            possibleDivisors.remove(firstNumber)
+        if(possibleDivisors.size == 0){
+            return firstNumber
         }
-        if (possibleDivisors.size == 0) {
-            possibleDivisors.add(firstNumber)
-        }
+
         return possibleDivisors.random()
     }
 

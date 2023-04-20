@@ -11,11 +11,14 @@ import android.widget.Button
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import com.konovalov.compositiongame.R
 import com.konovalov.compositiongame.databinding.FragmentGameBinding
 import com.konovalov.compositiongame.domain.entity.DifficultyLevel
 import com.konovalov.compositiongame.domain.entity.GameResult
 import com.konovalov.compositiongame.domain.entity.MathMode
+import com.konovalov.compositiongame.presentation.ChooseLevelFragment.Companion.MATH_MODE
+import com.konovalov.compositiongame.presentation.GameFinishedFragment.Companion.GAME_RESULT
 
 class GameFragment : Fragment() {
 
@@ -141,25 +144,14 @@ class GameFragment : Fragment() {
     }
 
     private fun launchGameFinishedFragment(gameResult: GameResult) {
-        requireActivity().supportFragmentManager
-            .beginTransaction()
-            .replace(R.id.main_fragment_container, GameFinishedFragment.newInstance(gameResult))
-            .addToBackStack(null)
-            .commit()
+        val args = Bundle().apply {
+            putParcelable(GAME_RESULT, gameResult)
+        }
+        findNavController().navigate(R.id.action_gameFragment2_to_gameFinishedFragment2, args)
     }
 
     companion object {
 
         private const val KEY_LEVEL = "level"
-        private const val MATH_MODE = "mathMode"
-
-        fun newInstance(difficultyLevel: DifficultyLevel, mathMode: MathMode): GameFragment {
-            return GameFragment().apply {
-                arguments = Bundle().apply {
-                    putParcelable(KEY_LEVEL, difficultyLevel)
-                    putParcelable(MATH_MODE, mathMode)
-                }
-            }
-        }
     }
 }

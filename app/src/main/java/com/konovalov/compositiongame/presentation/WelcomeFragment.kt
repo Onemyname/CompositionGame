@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import com.konovalov.compositiongame.R
 import com.konovalov.compositiongame.databinding.FragmentWelcomeBinding
 
@@ -37,18 +38,7 @@ class WelcomeFragment : Fragment() {
     }
 
     private fun launchChooseMathModeFragment() {
-        requireActivity().supportFragmentManager
-            .beginTransaction()
-            .replace(R.id.main_fragment_container, ChooseMathModeFragment.newInstance())
-            .addToBackStack(null)
-            .commit()
-    }
-
-
-    companion object {
-        fun newInstance(): WelcomeFragment {
-            return WelcomeFragment()
-        }
+        findNavController().navigate(R.id.action_welcomeFragment_to_chooseMathModeFragment2)
     }
 
 }

@@ -5,7 +5,10 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:name="com.konovalov.compositiongame.presentation.WelcomeFragment"
+    android:name="androidx.navigation.fragment.NavHostFragment"
+    app:navGraph="@navigation/main_navigation"
+    app:defaultNavHost = "true"
     android:layout_height="match_parent"
     tools:context=".presentation.MainActivity"
-    tools:layout="@layout/fragment_welcome" />
+    tools:layout="@layout/fragment_welcome"
+    xmlns:app="http://schemas.android.com/apk/res-auto" />

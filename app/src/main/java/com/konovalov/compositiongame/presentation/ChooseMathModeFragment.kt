@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import com.konovalov.compositiongame.R
 import com.konovalov.compositiongame.databinding.FragmentChooseMathModeBinding
 import com.konovalov.compositiongame.domain.entity.MathMode
@@ -42,21 +43,18 @@ class ChooseMathModeFragment : Fragment() {
     }
 
     private fun launchChooseLevelFragment(mathMode: MathMode) {
-        requireActivity().supportFragmentManager.beginTransaction()
-            .replace(R.id.main_fragment_container, ChooseLevelFragment.newInstance(mathMode))
-            .addToBackStack(null)
-            .commit()
+        val args = Bundle().apply {
+            putParcelable(ChooseLevelFragment.MATH_MODE, mathMode)
+        }
+        findNavController().navigate(
+            R.id.action_chooseMathModeFragment2_to_chooseLevelFragment2,
+            args
+        )
     }
 
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
-    }
-
-    companion object {
-        fun newInstance(): ChooseMathModeFragment {
-            return ChooseMathModeFragment()
-        }
     }
 
 

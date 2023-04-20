@@ -6,8 +6,8 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.activity.OnBackPressedCallback
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import com.konovalov.compositiongame.R
 import com.konovalov.compositiongame.databinding.FragmentGameFinishedBinding
 import com.konovalov.compositiongame.domain.entity.GameResult
@@ -37,17 +37,9 @@ class GameFinishedFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         bindViews()
-
         binding.buttonRetry.setOnClickListener {
-            launchWelcomeFragment()
+            retryGame()
         }
-        requireActivity().onBackPressedDispatcher.addCallback(
-            viewLifecycleOwner,
-            object : OnBackPressedCallback(true) {
-                override fun handleOnBackPressed() {
-                    retryGame()
-                }
-            })
     }
 
     private fun bindViews() {
@@ -80,18 +72,11 @@ class GameFinishedFragment : Fragment() {
     }
 
     private fun retryGame() {
-        requireActivity().supportFragmentManager.apply {
-            popBackStack()
-            popBackStack()
-        }
+        launchChooseMathModeFragment()
     }
 
-    private fun launchWelcomeFragment() {
-        requireActivity().supportFragmentManager
-            .beginTransaction()
-            .addToBackStack(null)
-            .replace(R.id.main_fragment_container, WelcomeFragment.newInstance())
-            .commit()
+    private fun launchChooseMathModeFragment() {
+        findNavController().navigate(R.id.action_gameFinishedFragment2_to_chooseMathModeFragment2)
     }
 
     override fun onDestroyView() {
@@ -107,15 +92,6 @@ class GameFinishedFragment : Fragment() {
     }
 
     companion object {
-
-        private const val GAME_RESULT = "gameResult"
-
-        fun newInstance(gameResult: GameResult): GameFinishedFragment {
-            return GameFinishedFragment().apply {
-                arguments = Bundle().apply {
-                    putParcelable(GAME_RESULT, gameResult)
-                }
-            }
-        }
+        const val GAME_RESULT = "gameResult"
     }
 }

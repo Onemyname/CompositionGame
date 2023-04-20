@@ -8,7 +8,7 @@ import com.konovalov.compositiongame.domain.entity.Question
 interface GameRepository {
 
     fun generateQuestion(
-        maxExpressionNumber: Int,
+        maxNumber: Int,
         countOfOptions: Int,
         mathMode: MathMode
     ): Question

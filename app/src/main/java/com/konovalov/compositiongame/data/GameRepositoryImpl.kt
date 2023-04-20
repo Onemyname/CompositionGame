@@ -12,15 +12,15 @@ import com.konovalov.compositiongame.domain.repository.GameRepository
 
 object GameRepositoryImpl : GameRepository {
     override fun generateQuestion(
-        maxExpressionNumber: Int,
+        maxNumber: Int,
         countOfOptions: Int,
         mathMode: MathMode
     ): Question {
-        val firstNumber: Int = generateFirstNumber(maxExpressionNumber, mathMode)
-        val secondNumber: Int = generateSecondNumber(firstNumber, maxExpressionNumber, mathMode)
+        val firstNumber: Int = generateFirstNumber(maxNumber, mathMode)
+        val secondNumber: Int = generateSecondNumber(firstNumber, maxNumber, mathMode)
         val answerAndOptions: Pair<Int, List<Int>> =
             getAnswerAndOptions(
-                maxExpressionNumber,
+                maxNumber,
                 countOfOptions,
                 firstNumber,
                 secondNumber,

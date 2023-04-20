@@ -144,7 +144,7 @@ class GameViewModel(
 
     private fun generateQuestion() {
         _question.value = generateQuestionUseCase(
-            gameSettings.maxExpressionNumber,
+            gameSettings.maxNumber,
             gameSettings.mathMode
         )
     }

@@ -2,11 +2,13 @@
 
 package com.konovalov.compositiongame.presentation
 
+import android.media.MediaFormat.KEY_LEVEL
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import com.konovalov.compositiongame.R
 import com.konovalov.compositiongame.databinding.FragmentChooseLevelBinding
 import com.konovalov.compositiongame.domain.entity.DifficultyLevel
@@ -52,10 +54,11 @@ class ChooseLevelFragment : Fragment() {
     }
 
     private fun launchGameFragment(level: DifficultyLevel, mathMode: MathMode) {
-        requireActivity().supportFragmentManager.beginTransaction()
-            .replace(R.id.main_fragment_container, GameFragment.newInstance(level, mathMode))
-            .addToBackStack(null)
-            .commit()
+        val args = Bundle().apply {
+            putParcelable(KEY_LEVEL, level)
+            putParcelable(MATH_MODE, mathMode)
+        }
+        findNavController().navigate(R.id.action_chooseLevelFragment2_to_gameFragment2, args)
     }
 
     override fun onDestroyView() {
@@ -71,14 +74,6 @@ class ChooseLevelFragment : Fragment() {
 
     companion object {
 
-        private const val MATH_MODE = "mathMode"
-
-        fun newInstance(mathMode: MathMode): ChooseLevelFragment {
-            return ChooseLevelFragment().apply {
-                arguments = Bundle().apply {
-                    putParcelable(MATH_MODE, mathMode)
-                }
-            }
-        }
+        const val MATH_MODE = "mathMode"
     }
 }

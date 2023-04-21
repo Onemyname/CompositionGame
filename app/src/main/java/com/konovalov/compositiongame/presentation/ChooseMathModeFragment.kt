@@ -6,7 +6,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
-import com.konovalov.compositiongame.R
 import com.konovalov.compositiongame.databinding.FragmentChooseMathModeBinding
 import com.konovalov.compositiongame.domain.entity.MathMode
 
@@ -43,12 +42,9 @@ class ChooseMathModeFragment : Fragment() {
     }
 
     private fun launchChooseLevelFragment(mathMode: MathMode) {
-        val args = Bundle().apply {
-            putParcelable(ChooseLevelFragment.MATH_MODE, mathMode)
-        }
         findNavController().navigate(
-            R.id.action_chooseMathModeFragment2_to_chooseLevelFragment2,
-            args
+            ChooseMathModeFragmentDirections
+                .actionChooseMathModeFragmentToChooseLevelFragment(mathMode)
         )
     }
 

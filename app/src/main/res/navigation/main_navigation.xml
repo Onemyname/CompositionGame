@@ -10,43 +10,55 @@
         android:name="com.konovalov.compositiongame.presentation.WelcomeFragment"
         android:label="WelcomeFragment" >
         <action
-            android:id="@+id/action_welcomeFragment_to_chooseMathModeFragment2"
-            app:destination="@id/chooseMathModeFragment2" />
+            android:id="@+id/action_welcomeFragment_to_chooseMathModeFragment"
+            app:destination="@id/chooseMathModeFragment" />
     </fragment>
     <fragment
-        android:id="@+id/chooseMathModeFragment2"
+        android:id="@+id/chooseMathModeFragment"
         android:name="com.konovalov.compositiongame.presentation.ChooseMathModeFragment"
         android:label="ChooseMathModeFragment" >
         <action
-            android:id="@+id/action_chooseMathModeFragment2_to_chooseLevelFragment2"
-            app:destination="@id/chooseLevelFragment2" />
+            android:id="@+id/action_chooseMathModeFragment_to_chooseLevelFragment"
+            app:destination="@id/chooseLevelFragment" />
     </fragment>
     <fragment
-        android:id="@+id/chooseLevelFragment2"
+        android:id="@+id/chooseLevelFragment"
         android:name="com.konovalov.compositiongame.presentation.ChooseLevelFragment"
         android:label="ChooseLevelFragment" >
         <action
-            android:id="@+id/action_chooseLevelFragment2_to_gameFragment2"
-            app:destination="@id/gameFragment2" />
+            android:id="@+id/action_chooseLevelFragment_to_gameFragment"
+            app:destination="@id/gameFragment" />
+        <argument
+            android:name="mathMode"
+            app:argType="com.konovalov.compositiongame.domain.entity.MathMode" />
     </fragment>
     <fragment
-        android:id="@+id/gameFragment2"
+        android:id="@+id/gameFragment"
         android:name="com.konovalov.compositiongame.presentation.GameFragment"
         android:label="fragment_game"
         tools:layout="@layout/fragment_game" >
         <action
-            android:id="@+id/action_gameFragment2_to_gameFinishedFragment2"
-            app:destination="@id/gameFinishedFragment2"
-            app:popUpTo="@id/gameFragment2"
+            android:id="@+id/action_gameFragment_to_gameFinishedFragment"
+            app:destination="@id/gameFinishedFragment"
+            app:popUpTo="@id/gameFragment"
             app:popUpToInclusive="true" />
+        <argument
+            android:name="difficultyLevel"
+            app:argType="com.konovalov.compositiongame.domain.entity.DifficultyLevel" />
+        <argument
+            android:name="mathMode"
+            app:argType="com.konovalov.compositiongame.domain.entity.MathMode" />
     </fragment>
     <fragment
-        android:id="@+id/gameFinishedFragment2"
+        android:id="@+id/gameFinishedFragment"
         android:name="com.konovalov.compositiongame.presentation.GameFinishedFragment"
         android:label="fragment_game_finished"
         tools:layout="@layout/fragment_game_finished" >
         <action
-            android:id="@+id/action_gameFinishedFragment2_to_chooseMathModeFragment2"
-            app:destination="@id/chooseMathModeFragment2" />
+            android:id="@+id/action_gameFinishedFragment_to_chooseMathModeFragment"
+            app:destination="@id/chooseMathModeFragment" />
+        <argument
+            android:name="gameResult"
+            app:argType="com.konovalov.compositiongame.domain.entity.GameResult" />
     </fragment>
 </navigation>

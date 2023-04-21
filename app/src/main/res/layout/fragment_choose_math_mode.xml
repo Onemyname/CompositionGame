@@ -23,7 +23,7 @@
         android:textAppearance="@style/boba_cups_big_text_style"
         android:background="@drawable/button_choose_background"
         app:backgroundTint="@color/khaki"
-        />
+        tools:ignore="VisualLintButtonSize" />
 
     <Button
         android:id="@+id/subtraction_button"
@@ -41,7 +41,8 @@
         app:layout_constraintVertical_bias="0.50"
         android:textAppearance="@style/boba_cups_big_text_style"
         android:background="@drawable/button_choose_background"
-        app:backgroundTint="@color/forest_green"/>
+        app:backgroundTint="@color/forest_green"
+        tools:ignore="VisualLintButtonSize" />
 
     <Button
         android:id="@+id/multiplication_button"
@@ -61,25 +62,27 @@ android:gravity="center"
         app:layout_constraintVertical_bias="0.75"
         android:textAppearance="@style/boba_cups_big_text_style"
         android:background="@drawable/button_choose_background"
-        app:backgroundTint="@color/goldenrod"/>
+        app:backgroundTint="@color/goldenrod"
+        tools:ignore="VisualLintButtonSize" />
 
     <Button
         android:id="@+id/division_button"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginTop="4dp"
-        android:layout_marginBottom="8dp"
         android:layout_marginStart="8dp"
+        android:layout_marginTop="4dp"
         android:layout_marginEnd="8dp"
-        android:text="@string/division"
-        app:layout_constraintTop_toBottomOf="@+id/multiplication_button"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintVertical_bias="1.0"
-        android:textAppearance="@style/boba_cups_big_text_style"
+        android:layout_marginBottom="8dp"
         android:background="@drawable/button_choose_background"
-        app:backgroundTint="@color/tomato"/>
+        android:text="@string/division"
+        android:textAppearance="@style/boba_cups_big_text_style"
+        app:backgroundTint="@color/tomato"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/multiplication_button"
+        app:layout_constraintVertical_bias="1.0"
+        tools:ignore="VisualLintButtonSize,TextContrastCheck" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,5 +1,3 @@
-@file:Suppress("DEPRECATION")
-
 package com.konovalov.compositiongame.presentation
 
 import android.content.res.ColorStateList
@@ -12,18 +10,16 @@ import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
 import com.konovalov.compositiongame.R
 import com.konovalov.compositiongame.databinding.FragmentGameBinding
-import com.konovalov.compositiongame.domain.entity.DifficultyLevel
 import com.konovalov.compositiongame.domain.entity.GameResult
 import com.konovalov.compositiongame.domain.entity.MathMode
-import com.konovalov.compositiongame.presentation.ChooseLevelFragment.Companion.MATH_MODE
-import com.konovalov.compositiongame.presentation.GameFinishedFragment.Companion.GAME_RESULT
+
 
 class GameFragment : Fragment() {
 
-    private lateinit var difficultyLevel: DifficultyLevel
-    private lateinit var mathMode: MathMode
+    private val args by navArgs<GameFragmentArgs>()
 
     private val tvOptions by lazy {
         mutableListOf<Button>().apply {
@@ -37,7 +33,7 @@ class GameFragment : Fragment() {
     }
 
     private val gameViewModelFactory by lazy {
-        GameViewModelFactory(difficultyLevel, mathMode, requireActivity().application)
+        GameViewModelFactory(args.difficultyLevel, args.mathMode, requireActivity().application)
     }
     private val viewModel: GameViewModel by lazy {
         ViewModelProvider(this, gameViewModelFactory)[GameViewModel::class.java]
@@ -47,10 +43,6 @@ class GameFragment : Fragment() {
     private val binding: FragmentGameBinding
         get() = _binding ?: throw RuntimeException("FragmentGameBinding is equal to null")
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        parseArgs()
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -64,7 +56,7 @@ class GameFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding.arithmeticOperationSign.text = setSign(mathMode)
+        binding.arithmeticOperationSign.text = setSign(args.mathMode)
         observeGameViewModel()
         setClickListenersToOptions()
     }
@@ -128,30 +120,12 @@ class GameFragment : Fragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
-
-    }
-
-    private fun parseArgs() {
-        with(requireArguments()) {
-            getParcelable<DifficultyLevel>(KEY_LEVEL)?.let {
-                difficultyLevel = it
-            }
-            getParcelable<MathMode>(MATH_MODE)?.let {
-                mathMode = it
-            }
-        }
-
     }
 
     private fun launchGameFinishedFragment(gameResult: GameResult) {
-        val args = Bundle().apply {
-            putParcelable(GAME_RESULT, gameResult)
-        }
-        findNavController().navigate(R.id.action_gameFragment2_to_gameFinishedFragment2, args)
-    }
-
-    companion object {
-
-        private const val KEY_LEVEL = "level"
+        findNavController().navigate(
+            GameFragmentDirections
+                .actionGameFragmentToGameFinishedFragment(gameResult)
+        )
     }
 }

@@ -1,5 +1,3 @@
-@file:Suppress("DEPRECATION")
-
 package com.konovalov.compositiongame.presentation
 
 import android.os.Bundle
@@ -8,22 +6,17 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
 import com.konovalov.compositiongame.R
 import com.konovalov.compositiongame.databinding.FragmentGameFinishedBinding
-import com.konovalov.compositiongame.domain.entity.GameResult
 
 class GameFinishedFragment : Fragment() {
 
-    private lateinit var gameResult: GameResult
+    private val args by navArgs<GameFinishedFragmentArgs>()
 
     private var _binding: FragmentGameFinishedBinding? = null
     private val binding: FragmentGameFinishedBinding
         get() = _binding ?: throw RuntimeException("FragmentGameFinishedBinding is equal to null")
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        parseArgs()
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -46,15 +39,15 @@ class GameFinishedFragment : Fragment() {
         with(binding) {
             tvRequiredAnswers.text = String.format(
                 getString(R.string.required_score),
-                gameResult.gameSettings.minCountRightAnswers
+                args.gameResult.gameSettings.minCountRightAnswers
             )
             tvRequiredPercentage.text = String.format(
                 getString(R.string.required_percentage),
-                gameResult.gameSettings.minPercentOfRightAnswers
+                args.gameResult.gameSettings.minPercentOfRightAnswers
             )
             tvScoreAnswers.text = String.format(
                 getString(R.string.score_answers),
-                gameResult.countOfRightAnswers
+                args.gameResult.countOfRightAnswers
             )
             tvScorePercentage.text = String.format(
                 getString(R.string.score_percentage),
@@ -63,7 +56,7 @@ class GameFinishedFragment : Fragment() {
         }
     }
 
-    private fun getPercentage(): Int = with(gameResult) {
+    private fun getPercentage(): Int = with(args.gameResult) {
         if (countOfQuestions == 0) {
             0
         } else {
@@ -76,22 +69,14 @@ class GameFinishedFragment : Fragment() {
     }
 
     private fun launchChooseMathModeFragment() {
-        findNavController().navigate(R.id.action_gameFinishedFragment2_to_chooseMathModeFragment2)
+        findNavController().navigate(
+            GameFinishedFragmentDirections
+                .actionGameFinishedFragmentToChooseMathModeFragment()
+        )
     }
 
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
-    }
-
-    private fun parseArgs() {
-        requireArguments().getParcelable<GameResult>(GAME_RESULT)?.let {
-            gameResult = it
-        }
-
-    }
-
-    companion object {
-        const val GAME_RESULT = "gameResult"
     }
 }

@@ -1,30 +1,22 @@
-@file:Suppress("DEPRECATION")
-
 package com.konovalov.compositiongame.presentation
 
-import android.media.MediaFormat.KEY_LEVEL
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
-import com.konovalov.compositiongame.R
+import androidx.navigation.fragment.navArgs
 import com.konovalov.compositiongame.databinding.FragmentChooseLevelBinding
 import com.konovalov.compositiongame.domain.entity.DifficultyLevel
 import com.konovalov.compositiongame.domain.entity.MathMode
 
 class ChooseLevelFragment : Fragment() {
-    private lateinit var mathMode: MathMode
 
+    private val args by navArgs<ChooseLevelFragmentArgs>()
     private var _binding: FragmentChooseLevelBinding? = null
     private val binding: FragmentChooseLevelBinding
         get() = _binding ?: throw RuntimeException("FragmentChooseLevelBinding is equal to null")
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        parseArgs()
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -39,41 +31,29 @@ class ChooseLevelFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         with(binding) {
             easyLevelButton.setOnClickListener {
-                launchGameFragment(DifficultyLevel.EASY, mathMode)
+                launchGameFragment(DifficultyLevel.EASY, args.mathMode)
             }
             normalLevelButton.setOnClickListener {
-                launchGameFragment(DifficultyLevel.NORMAL, mathMode)
+                launchGameFragment(DifficultyLevel.NORMAL, args.mathMode)
             }
             hardLevelButton.setOnClickListener {
-                launchGameFragment(DifficultyLevel.HARD, mathMode)
+                launchGameFragment(DifficultyLevel.HARD, args.mathMode)
             }
             testLevelButton.setOnClickListener {
-                launchGameFragment(DifficultyLevel.TEST, mathMode)
+                launchGameFragment(DifficultyLevel.TEST, args.mathMode)
             }
         }
     }
 
     private fun launchGameFragment(level: DifficultyLevel, mathMode: MathMode) {
-        val args = Bundle().apply {
-            putParcelable(KEY_LEVEL, level)
-            putParcelable(MATH_MODE, mathMode)
-        }
-        findNavController().navigate(R.id.action_chooseLevelFragment2_to_gameFragment2, args)
+        findNavController().navigate(
+            ChooseLevelFragmentDirections
+                .actionChooseLevelFragmentToGameFragment(level, mathMode)
+        )
     }
 
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
-    }
-
-    private fun parseArgs() {
-        requireArguments().getParcelable<MathMode>(MATH_MODE)?.let {
-            mathMode = it
-        }
-    }
-
-    companion object {
-
-        const val MATH_MODE = "mathMode"
     }
 }

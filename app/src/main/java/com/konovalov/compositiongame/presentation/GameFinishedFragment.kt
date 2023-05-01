@@ -7,7 +7,6 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
-import com.konovalov.compositiongame.R
 import com.konovalov.compositiongame.databinding.FragmentGameFinishedBinding
 
 class GameFinishedFragment : Fragment() {

@@ -1,5 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout>
+
+    <data>
+        <variable
+            name="viewModel"
+            type="com.konovalov.compositiongame.presentation.GameViewModel" />
+        <variable
+            name="mathMode"
+            type="com.konovalov.compositiongame.domain.entity.MathMode" />
+    </data>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -20,6 +29,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
+        android:text="@{viewModel.formattedTime}"
         tools:text="00:00" />
 
     <TextView
@@ -44,6 +54,7 @@
         android:layout_height="120dp"
         android:layout_marginStart="8dp"
         android:gravity="center"
+        app:onOptionClickListener="@{(option)-> viewModel.chooseAnswer(option)}"
         android:textAppearance="@style/boba_cups_big_text_style"
         app:layout_constraintBottom_toTopOf="@id/tv_option_4"
         app:layout_constraintEnd_toStartOf="@id/tv_option_5"
@@ -51,6 +62,7 @@
         app:layout_constraintStart_toStartOf="parent"
         tools:text="1"
         app:backgroundTint="@color/dark_slate_gray"
+        android:text = "@{viewModel.question.options.get(0).toString()}"
         android:background="@drawable/button_choose_background"
         />
 
@@ -60,11 +72,13 @@
         android:layout_height="120dp"
         android:gravity="center"
         android:textAppearance="@style/boba_cups_big_text_style"
+        app:onOptionClickListener="@{(option)-> viewModel.chooseAnswer(option)}"
         app:layout_constraintBottom_toTopOf="@id/tv_option_4"
         app:layout_constraintEnd_toStartOf="@id/tv_option_6"
         app:layout_constraintStart_toEndOf="@id/tv_option_4"
         tools:text="2"
         app:backgroundTint="@color/royal_blue"
+        android:text = "@{viewModel.question.options.get(1).toString()}"
         android:background="@drawable/button_choose_background"/>
 
     <Button
@@ -74,11 +88,13 @@
         android:layout_marginEnd="8dp"
         android:gravity="center"
         android:textAppearance="@style/boba_cups_big_text_style"
+        app:onOptionClickListener="@{(option)-> viewModel.chooseAnswer(option)}"
         app:layout_constraintBottom_toTopOf="@id/tv_option_4"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@id/tv_option_5"
         tools:text="3"
         app:backgroundTint="@color/dark_slate_gray"
+        android:text = "@{viewModel.question.options.get(2).toString()}"
         android:background="@drawable/button_choose_background"/>
 
     <Button
@@ -89,12 +105,14 @@
         android:layout_marginBottom="4dp"
         android:gravity="center"
         android:textAppearance="@style/boba_cups_big_text_style"
+        app:onOptionClickListener="@{(option)-> viewModel.chooseAnswer(option)}"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@id/tv_option_5"
         app:layout_constraintHorizontal_chainStyle="spread"
         app:layout_constraintStart_toStartOf="parent"
         tools:text="4"
         app:backgroundTint="@color/royal_blue"
+        android:text = "@{viewModel.question.options.get(3).toString()}"
         android:background="@drawable/button_choose_background"/>
 
     <Button
@@ -104,11 +122,13 @@
         android:layout_marginBottom="4dp"
         android:gravity="center"
         android:textAppearance="@style/boba_cups_big_text_style"
+        app:onOptionClickListener="@{(option)-> viewModel.chooseAnswer(option)}"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@id/tv_option_6"
         app:layout_constraintStart_toEndOf="@id/tv_option_4"
         tools:text="5"
         app:backgroundTint="@color/dark_slate_gray"
+        android:text = "@{viewModel.question.options.get(4).toString()}"
         android:background="@drawable/button_choose_background"/>
 
     <Button
@@ -119,17 +139,18 @@
         android:layout_marginBottom="4dp"
         android:gravity="center"
         android:textAppearance="@style/boba_cups_big_text_style"
+        app:onOptionClickListener="@{(option)-> viewModel.chooseAnswer(option)}"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@id/tv_option_5"
         tools:text="6"
         app:backgroundTint="@color/royal_blue"
+        android:text = "@{viewModel.question.options.get(5).toString()}"
         android:background="@drawable/button_choose_background"
 />
 
     <ProgressBar
         android:id="@+id/progress_bar"
-
         android:layout_width="0dp"
         android:layout_height="40dp"
         android:layout_marginStart="8dp"
@@ -137,6 +158,8 @@
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="4dp"
         android:max="100"
+        android:progress="@{viewModel.percentOfRightAnswer}"
+        android:secondaryProgress="@{viewModel.minPercent}"
         app:layout_constraintBottom_toTopOf="@+id/tv_option_2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -155,6 +178,7 @@
         app:layout_constraintTop_toBottomOf="@+id/tv_timer"
         app:layout_constraintVertical_bias="0.5"
         android:gravity="center"
+        app:numberAsText = "@{viewModel.question.firstNumber}"
         android:textAppearance="@style/boba_cups_big_text_style"
 />
 
@@ -169,6 +193,7 @@
         app:layout_constraintTop_toBottomOf="@+id/tv_timer"
         app:layout_constraintVertical_bias="0.5"
         android:gravity="center"
+        app:arithmeticSign="@{mathMode}"
         android:textAppearance="@style/boba_cups_text_style"/>
 
     <TextView
@@ -182,6 +207,7 @@
         app:layout_constraintTop_toBottomOf="@+id/tv_timer"
         app:layout_constraintVertical_bias="0.5"
         android:gravity="center"
+        app:numberAsText = "@{viewModel.question.secondNumber}"
         android:textAppearance="@style/boba_cups_big_text_style" />
 
     <TextView
